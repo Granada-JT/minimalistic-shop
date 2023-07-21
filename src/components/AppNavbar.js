@@ -14,7 +14,7 @@ export default function AppNavbar() {
 	  <Navbar expand="lg" className="bg-body-tertiary">
 		<Container fluid>
 		  <Navbar.Brand as={Link} to="/">
-			Zuitt
+			My Shop
 		  </Navbar.Brand>
 		  <Navbar.Toggle aria-controls="basic-navbar-nav" />
 		  <Navbar.Collapse id="basic-navbar-nav">
@@ -22,15 +22,15 @@ export default function AppNavbar() {
 			  <Nav.Link as={NavLink} to="/">
 				Home
 			  </Nav.Link>
-			  <Nav.Link as={NavLink} to="/courses">
-				Courses
+			  <Nav.Link as={NavLink} to="/products">
+				Products
 			  </Nav.Link>
   
 			  {user.id !== null ? (
 				<>
 				  {user.isAdmin ? (
 					<>
-					  <Nav.Link as={NavLink} to="/addCourse">Add Course</Nav.Link>
+					  <Nav.Link as={NavLink} to="/addCourse">Add Product</Nav.Link>
 					  <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
 					</>
 				  ) : (

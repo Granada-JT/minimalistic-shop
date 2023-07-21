@@ -7,6 +7,8 @@ import AppNavbar from './components/AppNavbar';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
+import Products from './pages/Products';
+import ProductView from './pages/ProductView';
 
 function App() {
 
@@ -66,10 +68,10 @@ function App() {
         <Container fluid>
           <AppNavbar />
           <Routes>
-{/*             <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<Courses/>} />
-            <Route path="/courses/:courseId" element={<CourseView/>} />
-            <Route path="/profile" element={<Profile/>} /> */}
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/products/" element={<Products/>} />
+            <Route path="/products/:courseId" element={<ProductView/>} />
+            {/* <Route path="/profile" element={<Profile/>} /> */}
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />
