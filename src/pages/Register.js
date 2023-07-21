@@ -8,7 +8,6 @@ export default function Register() {
 
 	const {user} = useContext(UserContext);
 
-	// State hooks to store the values of the register form input fields.
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -16,18 +15,9 @@ export default function Register() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	// State to determine whether the submit button is enabled or not.
 	const [ isActive, setIsActive] = useState(false);
 
-	// check if the values are successfully binded.
-	console.log(firstName);
-	console.log(lastName);
-	console.log(email);
-	console.log(mobileNo);
-	console.log(password);
-	console.log(confirmPassword);
-
-
+    // This function executes duplicate checks for mobile number and email address. It will register the new user if no duplicates are found.
 	function registerUser(e) {
 
 		// This code block prevents the page redirection via form submission.
