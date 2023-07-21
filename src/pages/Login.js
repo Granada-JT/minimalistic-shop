@@ -8,7 +8,6 @@ export default function Login() {
 
 	// Allows us to consume the User context object and it's properties to be used for user validation.
 	const { user, setUser } = useContext(UserContext);
-
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 

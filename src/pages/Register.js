@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
 export default function Register() {
@@ -29,9 +30,11 @@ export default function Register() {
 
 	function registerUser(e) {
 
-		// Prevents the page redirection via form submission
+		// This code block prevents the page redirection via form submission.
 		e.preventDefault();
 
+
+        // This code block checks if the email address is already registered.
 		fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
 			method: "POST",
 			headers: {
@@ -45,7 +48,13 @@ export default function Register() {
 		.then(data => {
 
 			if(data) {
-				alert("Duplicate email found!")
+
+                Swal.fire({
+                    title: "Registration Failed",
+                    icon: "error",
+                    text: "This email address you entered is already registered. Please login or try again.",
+                  });
+
 			} else {
 
 				fetch(`${process.env.REACT_APP_API_URL}/users/registration`, {
@@ -74,31 +83,38 @@ export default function Register() {
 						setPassword("");
 						setConfirmPassword("");
 
-						alert("Thank you for registering!")
+                        Swal.fire({
+                            title: "Registration Successful",
+                            icon: "success",
+                            text: `Welcome, ${firstName} !`
+                        });
 
 					} else if(!data.access) {
 
-                        alert("Mobile number already exists.")
+                        Swal.fire({
+                            title: "Registration Failed",
+                            icon: "error",
+                            text: "The mobile number you entered is already registered. Please log in or use a different mobile number."
+                        });
 
                     } else {
 
-						alert("Please try again later.")
+                        Swal.fire({
+                            title: "Registration Failed",
+                            icon: "error",
+                            text: "Sorry, there was an error during registration. Please try again later."
+                        });
+
 					}
 
 				})
 			}
 
-
 		})
 
 	};
 
-
-
-
-	/*
-		This side effect is to validate the states whether each state is empty string or not, if password is correct and if mobileNo has 11 digits.
-	*/
+    // This useEffect enables and disables the register button depending if the form fields has user input.
 	useEffect(() => {
 
 		if((firstName !== "" && lastName !== "" && email !== "" && mobileNo !== "" && password !== "" && confirmPassword !== "") && (password === confirmPassword) && (mobileNo.length === 11)) {
@@ -106,16 +122,16 @@ export default function Register() {
 		} else {
 
 				setIsActive(false)
+
 		}
 
 	}, [firstName, lastName, email, mobileNo, password, confirmPassword]);
 
-
-
 	return (
 
+        // This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
 		(user.id !== null) ?
-			<Navigate to="/courses" />
+			<Navigate to="/products" />
 		:
 			<Form onSubmit={e => registerUser(e)}>
 			  <h1 className="my=5 text-center">Register</h1>
@@ -124,7 +140,7 @@ export default function Register() {
 			    <Form.Label>First Name</Form.Label>
 			    <Form.Control 
 			    	type="text" 
-			    	placeholder="Enter First Name" 
+			    	placeholder="Enter your first name" 
 			    	required
 			    	value={firstName}
 			    	onChange={e => {setFirstName(e.target.value)}}
@@ -135,7 +151,7 @@ export default function Register() {
 			    <Form.Label>Last Name</Form.Label>
 			    <Form.Control 
 			    	type="text" 
-			    	placeholder="Enter Last Name" 
+			    	placeholder="Enter your last name" 
 			    	required 
 			    	value={lastName}
 			    	onChange={e => {setLastName(e.target.value)}}
@@ -146,7 +162,7 @@ export default function Register() {
 			    <Form.Label>Email address</Form.Label>
 			    <Form.Control 
 			    	type="email" 
-			    	placeholder="name@example.com"  
+			    	placeholder="Enter your email e.g.(name@example.com)"  
 			    	required
 			    	value={email}
 			    	onChange={e => {setEmail(e.target.value)}}
@@ -157,7 +173,7 @@ export default function Register() {
 			    <Form.Label>Mobile No:</Form.Label>
 			    <Form.Control 
 			    	type="text" 
-			    	placeholder="Enter 11 Digit No."
+			    	placeholder="Enter your 11 digit mobile no."
 			    	required 
 			    	value={mobileNo}
 			    	onChange={e => {setMobileNo(e.target.value)}}
@@ -168,7 +184,7 @@ export default function Register() {
 			    <Form.Label>Password</Form.Label>
 			    <Form.Control 
 			    	type="password" 
-			    	placeholder="Enter Password" 
+			    	placeholder="Enter your password" 
 			    	required 
 			    	value={password}
 			    	onChange={e => {setPassword(e.target.value)}}
@@ -179,7 +195,7 @@ export default function Register() {
 			    <Form.Label>Confirm Password:</Form.Label>
 			    <Form.Control 
 			    	type="password" 
-			    	placeholder="Confirm Password" 
+			    	placeholder="Confirm your password" 
 			    	required 
 			    	value={confirmPassword}
 			    	onChange={e => {setConfirmPassword(e.target.value)}}
@@ -188,12 +204,11 @@ export default function Register() {
 
 			  {
 			  	isActive 
-			  		? <Button variant="primary" type="submit" id="submitBtn">Submit</Button>
-			  		: <Button variant="danger" type="submit" id="submitBtn" disabled>Submit</Button>
+			  		? <Button variant="primary" type="submit" id="submitBtn">Register</Button>
+			  		: <Button variant="danger" type="submit" id="submitBtn" disabled>Register</Button>
 			  }
 
 			</Form>
-
 	)
 
 };
