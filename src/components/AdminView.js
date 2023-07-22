@@ -1,7 +1,7 @@
 import { Table } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-// import ArchiveProduct from './ArchiveProduct';
-// import EditProduct from './EditProduct';
+import ArchiveProduct from './ArchiveProduct';
+import EditProduct from './EditProduct';
 
 
 export default function AdminView({productsData, fetchData}) {
@@ -25,8 +25,8 @@ export default function AdminView({productsData, fetchData}) {
             {product.isActive ? "Available" : "Unavailable"}
           </td>
         {/*product id is passed as a prop*/}
-          {/* <td><EditProduct product={product._id} fetchData={fetchData}/></td>  
-          <td><ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/></td>   */}
+          <td><EditProduct product={product._id} fetchData={fetchData}/></td>  
+          <td><ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/></td>  
         </tr>
         )
     })

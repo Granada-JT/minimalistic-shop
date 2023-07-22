@@ -9,6 +9,7 @@ import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import ProductView from './pages/ProductView';
+import AddProduct from './pages/AddProduct';
 
 function App() {
 
@@ -75,6 +76,7 @@ function App() {
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />
+            <Route path="/addProduct" element={<AddProduct/>} />
             {/* <Route path="/*" element={<Error/>} />             */}
           </Routes>
         </Container>
