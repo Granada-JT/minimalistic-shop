@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import {UserProvider } from'./UserContext';
 import { useState, useEffect } from 'react';
 import AppNavbar from './components/AppNavbar';
+import Error from './pages/Error';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
@@ -69,7 +71,7 @@ function App() {
         <Container fluid>
           <AppNavbar />
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Home />} />
             <Route path="/products/" element={<Products/>} />
             <Route path="/products/:productId" element={<ProductView/>} />
             {/* <Route path="/profile" element={<Profile/>} /> */}
@@ -77,7 +79,7 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/addProduct" element={<AddProduct/>} />
-            {/* <Route path="/*" element={<Error/>} />             */}
+            <Route path="/*" element={<Error/>} />            
           </Routes>
         </Container>
       </Router>

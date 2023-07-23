@@ -1,54 +1,74 @@
 import {Link, NavLink} from 'react-router-dom';
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import {Button, Col, Container, Form, Navbar, Nav, Row} from 'react-bootstrap';
 import {useContext} from 'react';
 import UserContext from '../UserContext';
+import searchIcon from '../images/search.svg';
 
 
 
 export default function AppNavbar() {
 	const { user } = useContext(UserContext);
   
-	console.log(user);
-  
 	return (
-	  <Navbar expand="lg" className="bg-body-tertiary">
-		<Container>
-		  <Navbar.Brand as={Link} to="/">
-			My Shop
-		  </Navbar.Brand>
-		  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-		  <Navbar.Collapse id="basic-navbar-nav">
-			<Nav className="ms-auto">
-			  <Nav.Link as={NavLink} to="/">
+		<Navbar expand="lg" style={{ height: '94px' }}>
+		  <Container>
+			<Navbar.Brand as={Link} to="/" className="mt-3" style={{ fontSize: '24px', fontWeight: 'bold' }}>
+				My Shop
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls="basic-navbar-nav" />
+			  <Navbar.Collapse id="basic-navbar-nav">
+			  <Nav
+				className=" ms-md-0 me-md-auto my-2 my-lg-0"
+				style={{ maxHeight: '100px' , paddingLeft: '15rem', fontSize: '18px' }}
+				navbarScroll
+			  >
+				<Nav.Link as={NavLink} to="/" className="mt-3">
 				Home
-			  </Nav.Link>
-			  <Nav.Link as={NavLink} to="/products">
-				Products
-			  </Nav.Link>
-  
-			  {user.id !== null ? (
-				<>
-				  {user.isAdmin ? (
+				</Nav.Link>
+				<Nav.Link as={NavLink} to="/products" className="ms-3 mt-3">
+					Products
+				</Nav.Link>
+				{user.id !== null ? (
 					<>
-					  <Nav.Link as={NavLink} to="/addProduct">Add Product</Nav.Link>
-					  <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+					  {user.isAdmin ? (
+						<>
+						  <Nav.Link as={NavLink} to="/addProduct" className="ms-3 mt-3">Add Product</Nav.Link>
+						  <Nav.Link as={NavLink} to="/logout" className="ms-3 mt-3">Logout</Nav.Link>
+						</>
+					  ) : (
+						<>
+						  <Nav.Link as={NavLink} to="/profile" className="ms-3 mt-3">Profile</Nav.Link>
+						  <Nav.Link as={NavLink} to="/logout" className="ms-3 mt-3">Logout</Nav.Link>
+						</>
+					  )}
 					</>
 				  ) : (
 					<>
-					  <Nav.Link as={NavLink} to="/profile">Profile</Nav.Link>
-					  <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+					  <Nav.Link as={NavLink} to="/login" className="ms-3 mt-3">Login</Nav.Link>
+					  <Nav.Link as={NavLink} to="/register" className="ms-3 mt-3 me-md-5">Register</Nav.Link>
 					</>
 				  )}
-				</>
-			  ) : (
-				<>
-				  <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-				  <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
-				</>
-			  )}
-			</Nav>
-		  </Navbar.Collapse>
-		</Container>
-	  </Navbar>
-	);
-  }
+			  </Nav>
+			  <Row className="align-items-center mt-3">
+            <Col md={9} className="mb-2 mb-md-0">
+              <Form>
+                <Form.Control
+                  type="search"
+                  placeholder="Search products"
+                  aria-label="Search"
+                  style={{ fontSize: '12px', width: '100%' }}
+                />
+              </Form>
+            </Col>
+            <Col md={3}>
+			<Button variant="outline-white" style={{ width: '100%', padding: 'auto' }}>
+				<img src={searchIcon} alt="Search" />
+			</Button>
+            </Col>
+          </Row>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
