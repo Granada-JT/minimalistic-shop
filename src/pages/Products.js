@@ -10,7 +10,7 @@ export default function Products() {
 	const { user } = useContext(UserContext);
 
 	// State that will be used to store courses retrieved from the database.
-	const [products, setProducts] = useState([]);
+	const [ products, setProducts ] = useState([]);
 
 	// console.log(coursesData);
 	// console.log(coursesData[0]);

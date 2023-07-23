@@ -1,16 +1,14 @@
-import { Button, Card, Col, ListGroup, Row, } from 'react-bootstrap';
+import { Button, Card, Col, Container, ListGroup, Row, } from 'react-bootstrap';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import UserContext from '../UserContext';
 
 export default function ProductView() {
 
 	// The "useParams" hook allows us to retrieve the productId passed via the URL.
-	const {productId} = useParams()
+	const { productId } = useParams();
 
-	const { user } = useContext(UserContext);
-
+	console.log(productId)
 	// an object with methods to redirect user.
 	const navigate = useNavigate();
 
@@ -33,9 +31,9 @@ export default function ProductView() {
 		})
 	}, [productId])
 
-	const enroll = (productId) => {
+	const order = (productId) => {
 
-		fetch(`${ process.env.REACT_APP_API_URL }/users/enroll`, {
+		fetch(`${ process.env.REACT_APP_API_URL }/users/createOrder`, {
 		method: "POST",
 		headers: {
 		  "Content-Type": "application/json",
@@ -52,9 +50,9 @@ export default function ProductView() {
 
 		if(data){
 			Swal.fire({
-				title: "Successfully enrolled",
+				title: "Successfully ordered",
 				icon: "success",
-				text: "You have successfully enrolled for this product."
+				text: "You have successfully ordered for this product."
 			})
 
 			// Allow us to navigate the user back to the product page programmatically instead of using component.
@@ -73,21 +71,37 @@ export default function ProductView() {
 	}
 
     return (
-        <Card style={{ width: '18rem' }} >
-        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>{description}</Card.Text>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-                <ListGroup.Item>{price}</ListGroup.Item>
-                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-            </ListGroup>
-            <Card.Body>
-                <Card.Link href="#">Add to Cart</Card.Link>
-                <Card.Link href="#">Buy Now</Card.Link>
-            </Card.Body>
-        </Card>
+
+<Container>
+<Row>
+  <Col>
+    <Card className="my-5 ms-lg-5" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <Card.Img variant="center" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" style={{ margin: 'auto' }} />
+    </Card>
+  </Col>
+  <Col>
+    <Card className="my-5 me-lg-5" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <Card.Body>
+        <Card.Title className="py-2" style={{ fontSize: '2.5rem' }}>{name}</Card.Title>
+        <Card.Text className="py-2" style={{ fontSize: '1rem', textAlign: 'justify' }}>{description}</Card.Text>
+      </Card.Body>
+      <ListGroup>
+        <ListGroup.Item style={{ fontSize: '2rem' }}>Price: ₱{price}</ListGroup.Item>
+        {/* Add more list items here if needed */}
+      </ListGroup>
+      <Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button variant="danger" type="submit" id="submitBtn" className="mx-2">
+          Add to Cart
+        </Button>
+        <Button variant="danger" type="submit" id="submitBtn" className="mx-2">
+          Buy Now
+        </Button>
+      </Card.Body>
+    </Card>
+  </Col>
+</Row>
+
+</Container>
+
     );
 }

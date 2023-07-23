@@ -12,7 +12,7 @@ export default function AppNavbar() {
   
 	return (
 	  <Navbar expand="lg" className="bg-body-tertiary">
-		<Container fluid>
+		<Container>
 		  <Navbar.Brand as={Link} to="/">
 			My Shop
 		  </Navbar.Brand>
