@@ -124,9 +124,20 @@
   background-color: #508E4A;
 }
 
-
-
-
 #buttonCell {
   width: 200px;
+}
+
+/* AddProduct CSS */
+#addProductRow {
+  background-color: #E7E6E6;
+  background-size: 150%;
+  background-position: center;
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  max-width: auto;
+  margin-top: 1.5rem;
+  min-height: 79vh;
+  max-height: 79vh;
 }

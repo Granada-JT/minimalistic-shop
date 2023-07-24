@@ -1,8 +1,11 @@
 import { Form, Button } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
+import BannerTwoColumns from '../components/BannerTwoColumns';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
+import bgImage from '../images/background-loginPage.jpg';
+import colImage from '../images/background1-login.webp';
 
 export default function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -85,8 +88,10 @@ export default function Login() {
     setIsActive(email !== "" && password !== "");
   }, [email, password]);
 
-  return (
-    user.id !== null ? (
+  const data = {
+    backgroundImage: bgImage,
+    column1Image: colImage,
+    forms: user.id !== null ? (
       <Navigate to="/" />
     ) : (
       <Form onSubmit={authenticateUser}>
@@ -124,5 +129,9 @@ export default function Login() {
         }
       </Form>
     )
-  );
+  }
+
+  return (
+    <BannerTwoColumns data={data}/>
+  )
 }

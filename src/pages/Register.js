@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
+import BannerTwoColumns from '../components/BannerTwoColumns';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
+import bgImage from '../images/background-signUpPage.jpg';
+import colImage from '../images/colImage-signUpPage.webp';
 
 export default function Register() {
 
@@ -117,14 +120,17 @@ export default function Register() {
 
 	}, [firstName, lastName, email, mobileNo, password, confirmPassword]);
 
-	return (
-
-        // This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
+	const data = {
+		backgroundImage: bgImage,
+		column1Image: colImage,
+		forms: 
+		
+		// This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
 		(user.id !== null) ?
 			<Navigate to="/products" />
 		:
 			<Form onSubmit={e => registerUser(e)}>
-			  <h1 className="my=5 text-center">Register</h1>
+			  <h2 className="my=5 text-center">Sign Up</h2>
 
 			  <Form.Group className="mb-3" controlId="First Name">
 			    <Form.Label>First Name</Form.Label>
@@ -199,6 +205,12 @@ export default function Register() {
 			  }
 
 			</Form>
+	}
+
+	return (
+
+		<BannerTwoColumns data={data} />
+        
 	)
 
 };
