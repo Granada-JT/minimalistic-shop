@@ -1,101 +1,72 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Table } from 'react-bootstrap';
 
-export default function CartPage() {
-  const [cartItems, setCartItems] = useState([]);
+const CartPage = () => {
+  const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState('');
 
-//   useEffect(() => {
-//     fetchCartItems();
-//   }, []);
-
-
-  const addToCart = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/addToCart`, {
-      method: 'POST',
+  const fetchCart = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/getCart`, {
       headers: {
-        'Authorization': `Bearer ${getUserToken()}`,
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
+      cache: 'no-store',
     })
-    .then((response) => response.json())
-    .then((data) => {
-      setCartItems(data.cartItems);
+      .then((response) => response.json())
+      .then((data) => {
+        setCart(data.cartItems);
+        setTotalPrice(data.totalPrice);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  const changeQuantity = (productId, quantity) => {
-    fetch(`${process.env.REACT_APP_API_URL}/changeQuantity`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${getUserToken()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId, quantity }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      setCartItems(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  useEffect(() => {
+    // Fetch cart data initially
+    fetchCart();
 
-  const removeItemFromCart = (productId) => {
-    fetch(`${process.env.REACT_APP_API_URL}/removeItem`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${getUserToken()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      setCartItems(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+    // Polling interval in milliseconds (e.g., every 5 seconds)
+    const interval = setInterval(fetchCart, 5000);
 
-  const getUserToken = () => {
-    // Implement your logic to get the user token
-    // For example, you can use localStorage or a state management library like Redux
-    return 'user_token';
-  };
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // Run only once on component mount
 
   return (
-    <div>
-      <h1>Cart</h1>
-  
-      {cartItems.length === 0 ? (
-        <p>No items in the cart</p>
+    <Container>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
       ) : (
-        <ul>
-          {cartItems.map((cartItem) => (
-            <li key={cartItem.productId}>
-              <p>{cartItem.productName}</p>
-              <p>Quantity: {cartItem.quantity}</p>
-              <p>Price: ${cartItem.price}</p>
-              <p>Subtotal: ${cartItem.subTotal}</p>
-              <button onClick={() => changeQuantity(cartItem.productId, cartItem.quantity - 1)}>
-                Decrease Quantity
-              </button>
-              <button onClick={() => changeQuantity(cartItem.productId, cartItem.quantity + 1)}>
-                Increase Quantity
-              </button>
-              <button onClick={() => removeItemFromCart(cartItem.productId)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Table id="cartTable" striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Sub Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map((item) => (
+              <tr key={item.productId}>
+                <td>{item.productId.name}</td>
+                <td>{item.price}</td>
+                <td>{item.quantity}</td>
+                <td>{item.subTotal}</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan="4">Total Price: {totalPrice}</td>
+            </tr>
+          </tfoot>
+        </Table>
       )}
-  
-      <button onClick={addToCart}>Add to Cart</button>
-    </div>
-  )
-}
+    </Container>
+  );
+};
+
+export default CartPage;

@@ -168,3 +168,33 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
+
+/* Cart CSS */
+#cartTable {
+  margin-top: 20px;
+  border-radius: 15px;
+  border-collapse: separate;
+  background-color: #E7E6E6;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#cartTable th,
+#cartTable td {
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center; 
+  position: relative;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+#cartTable th {
+  background-color: #E7E6E6;
+  font-weight: bold;
+  border: none;
+}
+
+#cartTable td {
+  background-color: #fff;
+}
