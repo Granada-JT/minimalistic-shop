@@ -95,7 +95,7 @@ export default function Login() {
       <Navigate to="/" />
     ) : (
       <Form onSubmit={authenticateUser}>
-        <h1 className="my-5 text-center">Login</h1>
+        <h2 className="my-5 text-center">Login</h2>
         <Form.Group className="mb-3" controlId="Email address">
           <Form.Label>Email address</Form.Label>
           <Form.Control

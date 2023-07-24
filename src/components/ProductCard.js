@@ -1,32 +1,94 @@
-import { Button, Card, Col, ListGroup, Row, } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Card, Col, ListGroup } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import Swal from 'sweetalert2';
+import UserContext from '../UserContext';
+
 
 
 export default function ProductCard({productProp}) {
 
     const {_id, name, description, price } = productProp;
+    const { user } = useContext(UserContext);
+    const productId = productProp._id;
+    const [quantity] = useState(1);
+    const navigate = useNavigate();
+
+    const order = (productId) => {
+
+		fetch(`${ process.env.REACT_APP_API_URL }/orders/createOrder`, {
+		method: "POST",
+		headers: {
+		  "Content-Type": "application/json",
+		  Authorization: `Bearer ${ localStorage.getItem('token') }`
+		},
+		body: JSON.stringify({
+		  productId: productId,
+		  quantity: quantity
+		})
+		})
+		.then(res => res.json())
+		.then(data => {
+
+		console.log(data);
+
+		if(data){
+			Swal.fire({
+				icon: "success",
+				text: "You have successfully ordered for this product."
+			})
+
+			// Allow us to navigate the user back to the product page programmatically instead of using component.
+			navigate("/products")
+		}
+		else {
+			Swal.fire({
+				title: "Something went wrong",
+				icon: "error",
+				text: "Please try again."
+			})
+		}
+
+		});
+
+	}
 
     return (
-        <Card style={{ width: '18rem' }} className='my-5'>
+        <Card id="productCard" className='mb-2 mt-4'>
             <Link to={`/products/${_id}`}>
-            <Card.Img variant="top" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" />
+            <Card.Img id='productCardImg' variant="top" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" />
             </Link>
-            <Card.Body as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none' }}>
+            <Card.Body as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none', height: '300px' }}>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>{description}</Card.Text>
             </Card.Body>
-            <ListGroup as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none' }} className="list-group-flush">
-                <ListGroup.Item>Price: {price}</ListGroup.Item>
+            <ListGroup as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none' }} className="list-group-flush border-0">
+                <ListGroup.Item>Price: ₱{price}</ListGroup.Item>
         {/*         <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
                 <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
             </ListGroup>
-            <Card.Body>
-                    <Button variant="danger" type="submit" id="submitBtn" className="mx-2">
-                    Add to Cart
-                    </Button>
-                    <Button variant="danger" type="submit" id="submitBtn" className="mx-2">
+            <Card.Body className="d-flex justify-content-center">
+                    <Col className="d-flex justify-content-center">
+                        <>
+                        {user.id !== null ?
+								<Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#3B638C' }}
+								onClick={() => order(productId)}>
+									Add to Cart
+								</Button>
+								:
+								<Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#3B638C' }}
+								as={Link} to="/login">
+									Add to Cart
+								</Button>
+                        }
+                        </>
+                    </Col>
+                    <Col className="d-flex justify-content-center">
+                    <Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#CC3939' }}>
                     Buy Now
                     </Button>
+                    </Col>
+
             </Card.Body>
         </Card>
     );

@@ -19,7 +19,7 @@ export default function Banner({ data }) {
     <Container className="my-5" style={bannerStyle}>
       <Row>
         <Col>
-            <img src={column1Image} alt="BackgroundImage" style={{ width: '100%', maxHeight: '79vh' }} />
+            <img src={column1Image} alt="BackgroundImage" style={{ width: '100%' }} />
         </Col>
         <Col>
             {forms}

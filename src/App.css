@@ -141,3 +141,30 @@
   min-height: 79vh;
   max-height: 79vh;
 }
+
+/* UserView CSS */
+#userViewRow {
+  background-color: #E7E6E6;
+  background-size: 150%;
+  background-position: center;
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  max-width: auto;
+  margin-top: 1.5rem;
+  min-height: 79vh;
+}
+
+
+
+/* ProductCard CSS */
+#productCard {
+  width: 18rem;
+  height: 530px;
+  border-radius: 15px;
+}
+
+#productCardImg {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}

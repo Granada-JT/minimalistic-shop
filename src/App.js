@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import {UserProvider } from'./UserContext';
 import { useState, useEffect } from 'react';
 import AppNavbar from './components/AppNavbar';
+import Cart from './pages/Cart';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -80,6 +81,7 @@ function App() {
             <Route path="/logout" element={<Logout/>} />
             <Route path="/addProduct" element={<AddProduct/>} />
             <Route path="/*" element={<Error/>} />            
+            <Route path="/cart" element={<Cart/>} />            
           </Routes>
         </Container>
       </Router>

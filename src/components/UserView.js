@@ -1,5 +1,7 @@
+import { Container, Col, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import '../App.css';
 // import ProductSearch from './CourseSearch';
 // import ProductSearchByPrice from './CourseSearchByPrice';
 
@@ -31,7 +33,16 @@ export default function UserView({productsData}) {
     <>
 {/*       <ProductSearch />
       <ProductSearchByPrice /> */}
-      { products }
+        <Container>
+        <Row id="userViewRow">
+          {products.map((product, index) => (
+            <Col key={index} sm={12} md={6} lg={4} xl={3}>
+              {product}
+            </Col>
+          ))}
+        </Row>
+      </Container>
+
     </>
   )
 }

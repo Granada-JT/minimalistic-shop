@@ -130,7 +130,7 @@ export default function Register() {
 			<Navigate to="/products" />
 		:
 			<Form onSubmit={e => registerUser(e)}>
-			  <h2 className="my=5 text-center">Sign Up</h2>
+			  <h2 className="my-5 text-center">Sign Up</h2>
 
 			  <Form.Group className="mb-3" controlId="First Name">
 			    <Form.Label>First Name</Form.Label>
@@ -200,8 +200,8 @@ export default function Register() {
 
 			  {
 			  	isActive 
-			  		? <Button variant="primary" type="submit" id="submitBtn">Register</Button>
-			  		: <Button variant="danger" type="submit" id="submitBtn" disabled>Register</Button>
+			  		? <Button variant="primary" type="submit" id="submitBtn" className="mb-5">Sign Up</Button>
+			  		: <Button variant="danger" type="submit" id="submitBtn" className="mb-5" disabled>Sign Up</Button>
 			  }
 
 			</Form>

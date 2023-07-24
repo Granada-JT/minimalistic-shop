@@ -120,12 +120,12 @@ export default function ProductView() {
 							<Col lg={6}>
 								<Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
 								{user.id !== null ?
-								<Button variant="warning" type="submit" id="submitBtn" className="mx-2 btn-lg w-100"
+								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#3B638C' }}
 								onClick={() => order(productId)}>
 									Add to Cart
 								</Button>
 								:
-								<Button variant="warning" type="submit" id="submitBtn" className="mx-2 btn-lg w-100"
+								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#3B638C' }}
 								as={Link} to="/login">
 									Add to Cart
 								</Button>
@@ -136,7 +136,7 @@ export default function ProductView() {
 							 {/* Still need to edit this after doing the dedicated checkout page, because this must redirect to the checkout page and skip the add to cart function. */}
 							<Col lg={6}>
 								<Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
-								<Button variant="danger" type="submit" id="submitBtn" className="mx-2 btn-lg w-100">
+								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#CC3939' }}>
 									Buy Now
 								</Button>
 								</Card.Body>
