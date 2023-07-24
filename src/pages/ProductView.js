@@ -1,4 +1,4 @@
-import { Button, Card, Col, Container, Form, ListGroup, Row, } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, ListGroup, Row } from 'react-bootstrap';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
@@ -6,75 +6,85 @@ import UserContext from '../UserContext';
 import '../App.css';
 
 export default function ProductView() {
+  const { user } = useContext(UserContext);
 
-	const { user } = useContext(UserContext);
+  // The "useParams" hook allows us to retrieve the productId passed via the URL.
+  const { productId } = useParams();
 
-	// The "useParams" hook allows us to retrieve the productId passed via the URL.
-	const { productId } = useParams();
+  // an object with methods to redirect user.
+  const navigate = useNavigate();
 
-	console.log(productId)
-	// an object with methods to redirect user.
-	const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState(0);
-	const [quantity,setQuantity] = useState(1);
+  useEffect(() => {
+    // a fetch request that will retrieve the details of a specific product
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setName(data.name);
+        setDescription(data.description);
+        setPrice(data.price);
+      });
+  }, [productId]);
 
-	useEffect(() => {
-		console.log(productId)
+  // This code block is used to create an order and automatically add it to the cart.
+  const order = (productId) => {
+    fetch(`${process.env.REACT_APP_API_URL}/orders/createOrder`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        productId: productId,
+        quantity: quantity,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+			console.log(true);
+        } else {
+          Swal.fire({
+            title: 'Something went wrong',
+            icon: 'error',
+            text: 'Please try again.',
+          });
+        }
+      });
+  };
 
-		// a fetch request that will retrieve the details of a specific product
-		fetch(`${ process.env.REACT_APP_API_URL }/products/${productId}`)
-		.then(res => res.json())
-		.then(data => {
-			console.log(data)
+  const addToCart = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/addToCart`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    })
+      .then((res) => res.json())
+      .then((cart) => {
+        console.log(cart);
+        if (cart) {
+          Swal.fire({
+            icon: 'success',
+            text: 'You have successfully created an order and added this product to cart.',
+          });
+          navigate('/products');
+        } else {
+          Swal.fire({
+            title: 'Something went wrong',
+            icon: 'error',
+            text: 'Please try again.',
+          });
+        }
+      });
+  };
 
-			setName(data.name);
-			setDescription(data.description);
-			setPrice(data.price);
-		})
-	}, [productId])
-
-	// This code block is used to create an order and automatically add it to the cart. (still needs to add the add to cart code.)
-	const order = (productId) => {
-
-		fetch(`${ process.env.REACT_APP_API_URL }/orders/createOrder`, {
-		method: "POST",
-		headers: {
-		  "Content-Type": "application/json",
-		  Authorization: `Bearer ${ localStorage.getItem('token') }`
-		},
-		body: JSON.stringify({
-		  productId: productId,
-		  quantity: quantity
-		})
-		})
-		.then(res => res.json())
-		.then(data => {
-
-		console.log(data);
-
-		if(data){
-			Swal.fire({
-				icon: "success",
-				text: "You have successfully ordered for this product."
-			})
-
-			// Allow us to navigate the user back to the product page programmatically instead of using component.
-			navigate("/products")
-		}
-		else {
-			Swal.fire({
-				title: "Something went wrong",
-				icon: "error",
-				text: "Please try again."
-			})
-		}
-
-		});
-
-	}
 
     return (
 
@@ -120,9 +130,17 @@ export default function ProductView() {
 							<Col lg={6}>
 								<Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
 								{user.id !== null ?
-								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#3B638C' }}
-								onClick={() => order(productId)}>
-									Add to Cart
+								<Button
+								type="submit"
+								id="submitBtn"
+								className="mx-2 btn-lg w-100 border-0"
+								style={{ backgroundColor: '#3B638C' }}
+								onClick={() => {
+									order(productId);
+									addToCart();
+								}}
+								>
+								Add to Cart
 								</Button>
 								:
 								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#3B638C' }}

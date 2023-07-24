@@ -14,44 +14,60 @@ export default function ProductCard({productProp}) {
     const [quantity] = useState(1);
     const navigate = useNavigate();
 
-    const order = (productId) => {
+  // This code block is used to create an order and automatically add it to the cart.
+  const order = (productId) => {
+    fetch(`${process.env.REACT_APP_API_URL}/orders/createOrder`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        productId: productId,
+        quantity: quantity,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+			console.log(true);
+        } else {
+          Swal.fire({
+            title: 'Something went wrong',
+            icon: 'error',
+            text: 'Please try again.',
+          });
+        }
+      });
+  };
 
-		fetch(`${ process.env.REACT_APP_API_URL }/orders/createOrder`, {
-		method: "POST",
-		headers: {
-		  "Content-Type": "application/json",
-		  Authorization: `Bearer ${ localStorage.getItem('token') }`
-		},
-		body: JSON.stringify({
-		  productId: productId,
-		  quantity: quantity
-		})
-		})
-		.then(res => res.json())
-		.then(data => {
-
-		console.log(data);
-
-		if(data){
-			Swal.fire({
-				icon: "success",
-				text: "You have successfully ordered for this product."
-			})
-
-			// Allow us to navigate the user back to the product page programmatically instead of using component.
-			navigate("/products")
-		}
-		else {
-			Swal.fire({
-				title: "Something went wrong",
-				icon: "error",
-				text: "Please try again."
-			})
-		}
-
-		});
-
-	}
+  const addToCart = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/addToCart`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    })
+      .then((res) => res.json())
+      .then((cart) => {
+        console.log(cart);
+        if (cart) {
+          Swal.fire({
+            icon: 'success',
+            text: 'You have successfully created an order and added this product to cart.',
+          });
+          navigate('/products');
+        } else {
+          Swal.fire({
+            title: 'Something went wrong',
+            icon: 'error',
+            text: 'Please try again.',
+          });
+        }
+      });
+  };
 
     return (
         <Card id="productCard" className='mb-2 mt-4'>
@@ -72,7 +88,10 @@ export default function ProductCard({productProp}) {
                         <>
                         {user.id !== null ?
 								<Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#3B638C' }}
-								onClick={() => order(productId)}>
+								onClick={() => {
+									order(productId);
+									addToCart();
+								}}>
 									Add to Cart
 								</Button>
 								:
