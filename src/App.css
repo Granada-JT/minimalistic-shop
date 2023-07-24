@@ -64,11 +64,14 @@
   max-height: 79vh;
 }
 
+/* AdminView CSS */
 #custom-table {
   margin-top: 20px;
   border-radius: 15px;
   border-collapse: separate;
   background-color: #E7E6E6;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #custom-table th,
@@ -76,14 +79,54 @@
   padding: 20px;
   border-radius: 15px;
   text-align: center; 
+  position: relative;
   vertical-align: middle;
+  box-sizing: border-box;
 }
 
 #custom-table th {
-  background-color: #ddd;
+  background-color: #E7E6E6;
   font-weight: bold;
+  border: none;
 }
 
 #custom-table td {
   background-color: #fff;
+}
+
+/* EditProduct CSS */
+#editButton,
+#archiveButton,
+#activateButton {
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+}
+
+#editButton {
+  background-color: #3B638C;
+}
+
+#archiveButton {
+  background-color: #CC3939;
+}
+
+#activateButton {
+  background-color: #508E4A;
+}
+
+
+
+
+#buttonCell {
+  width: 200px;
 }

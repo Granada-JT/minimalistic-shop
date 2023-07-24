@@ -25,7 +25,6 @@ export default function AdminView({productsData, fetchData}) {
           <td className={product.isActive ? "text-success" : "text-danger"}>
             {product.isActive ? "Available" : "Unavailable"}
           </td>
-        {/*product id is passed as a prop*/}
           <td><EditProduct product={product._id} fetchData={fetchData}/></td>  
           <td><ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/></td>  
         </tr>
@@ -43,12 +42,12 @@ export default function AdminView({productsData, fetchData}) {
         <Table id="custom-table" striped bordered hover responsive>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Product ID</th>
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
               <th>Availability</th>
-              <th colSpan="2">Actions</th>
+              <th colSpan="2" id="buttonCell">Actions</th>
             </tr>
           </thead>
     

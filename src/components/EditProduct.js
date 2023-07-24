@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import "../App.css"
 
 export default function EditProduct({product, fetchData}) {
 
@@ -74,9 +75,8 @@ export default function EditProduct({product, fetchData}) {
 
     return(
         <>
-            <Button variant="primary" size="sm" onClick={() => openEdit(product)}>Edit</Button>
+            <Button variant="primary" id="editButton" size="sm" onClick={() => openEdit(product)}>Edit</Button>
 
-        {/*Edit Modal*/}
         <Modal show={showEdit} onHide={closeEdit}>
             <Form onSubmit={e => editProduct(e, productId)}>
                 <Modal.Header closeButton>
