@@ -3,7 +3,7 @@ import {Button, Col, Container, Form, Navbar, Nav, Row} from 'react-bootstrap';
 import {useContext} from 'react';
 import UserContext from '../UserContext';
 import searchIcon from '../images/search.svg';
-
+import '../App.css';
 
 
 export default function AppNavbar() {
@@ -17,11 +17,7 @@ export default function AppNavbar() {
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			  <Navbar.Collapse id="basic-navbar-nav">
-			  <Nav
-				className=" ms-md-0 me-md-auto my-2 my-lg-0"
-				style={{ maxHeight: '100px' , paddingLeft: '15rem', fontSize: '18px' }}
-				navbarScroll
-			  >
+			  <Nav className="me-md-auto my-2 my-lg-0 custom-nav" id="navHome" navbarScroll>
 				<Nav.Link as={NavLink} to="/" className="mt-3">
 				Home
 				</Nav.Link>
@@ -45,7 +41,7 @@ export default function AppNavbar() {
 				  ) : (
 					<>
 					  <Nav.Link as={NavLink} to="/login" className="ms-3 mt-3">Login</Nav.Link>
-					  <Nav.Link as={NavLink} to="/register" className="ms-3 mt-3 me-md-5">Register</Nav.Link>
+					  <Nav.Link as={NavLink} to="/register" className="ms-3 mt-3 me-md-0 ">Sign Up</Nav.Link>
 					</>
 				  )}
 			  </Nav>

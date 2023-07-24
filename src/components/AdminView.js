@@ -1,7 +1,8 @@
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import ArchiveProduct from './ArchiveProduct';
 import EditProduct from './EditProduct';
+import '../App.css'
 
 
 export default function AdminView({productsData, fetchData}) {
@@ -36,26 +37,28 @@ export default function AdminView({productsData, fetchData}) {
   }, [productsData])
 
   return(
-    <>
-      <h1 className="text-center my-4"> Admin Dashboard</h1>
-
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Availability</th>
-            <th colSpan="2">Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {products}
-        </tbody>
-      </Table>  
+    
+    <>    
+      <Container>
+        <Table id="custom-table" striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Availability</th>
+              <th colSpan="2">Actions</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+            {products}
+          </tbody>
+        </Table>
+      </Container>
     </>
+    
 
   )
 }

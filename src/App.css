@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+
+/* AppNavBar CSS */
+#navHome {
+  max-height: 100px;
+  padding-left: 15rem;
+  font-size: 18px;
+}
+
+@media (max-width: 1200px) {
+  #navHome {
+    padding-left: 0;
+  }
+}
+
+/* ProductView CSS */
+#productViewCard {
+  background-image: url('./images/background-productView.jpg');
+  background-size: 150%;
+  background-position: center;
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  max-width: auto;
+  margin-top: 1.5rem;
+  min-height: 79vh;
+  max-height: 79vh;
+}
+
+#custom-table {
+  margin-top: 20px;
+  border-radius: 15px;
+  border-collapse: separate;
+  background-color: #E7E6E6;
+}
+
+#custom-table th,
+#custom-table td {
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center; 
+  vertical-align: middle;
+}
+
+#custom-table th {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+#custom-table td {
+  background-color: #fff;
+}

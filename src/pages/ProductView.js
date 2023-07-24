@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
+import '../App.css';
 
 export default function ProductView() {
 
@@ -78,20 +79,20 @@ export default function ProductView() {
     return (
 
 	<Container>
-		<Row>
-			<Col>
-				<Card className="my-5 ms-lg-5 border-0" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+		<Row className="align-items-center" id="productViewCard">
+			<Col lg={6}>
+				<Card className="my-5 ms-lg-5 d-flex justify-content-center border-0">
 					<Card.Img variant="center" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" className="m-2" />
 				</Card>
 			</Col>
-			<Col>
-				<Card className="my-5 me-lg-5 border-0" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+			<Col lg={6} className="d-flex justify-content-center">
+				<Card className="my-5 me-lg-5 border-0">
 					<Card.Body>
 						<Card.Title className="py-2" style={{ fontSize: '2.5rem' }}>{name}</Card.Title>
 						<Card.Text className="py-2" style={{ fontSize: '1rem', textAlign: 'justify' }}>{description}</Card.Text>
 					</Card.Body>
 						<ListGroup>
-							<ListGroup.Item style={{ fontSize: '2rem', border: 'none' }}>Price: ₱{price}</ListGroup.Item>
+							<ListGroup.Item style={{ fontSize: '1.5rem', border: 'none' }}>Price: ₱{price}</ListGroup.Item>
 							{/* Add more list items here if needed */}
 							<ListGroup.Item style={{ border: 'none' }}>
 							<Form.Label>Quantity:</Form.Label>
