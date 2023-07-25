@@ -9,6 +9,7 @@ import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import ProductView from './pages/ProductView';
@@ -75,7 +76,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products/" element={<Products/>} />
             <Route path="/products/:productId" element={<ProductView/>} />
-            {/* <Route path="/profile" element={<Profile/>} /> */}
+            <Route path="/profile" element={<Profile/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />

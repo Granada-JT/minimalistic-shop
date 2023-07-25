@@ -198,3 +198,31 @@
 #cartTable td {
   background-color: #fff;
 }
+
+/* Profile CSS */
+#profileContainer {
+  background-image: url('./images/background-productView.jpg');
+  background-size: 150%;
+  background-position: center;
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  max-width: auto;
+  margin-top: 1.5rem;
+  min-height: 79vh;
+  max-height: auto;
+}
+
+#rowProfile {
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  max-width: auto;
+  max-height: auto;
+  margin-top: 1.5rem;
+}
+
+#profilePic {
+  border-radius: 50%;
+  border: 5px solid #E7E6E6;
+}

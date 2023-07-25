@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Container, Table } from 'react-bootstrap';
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState('');
+  const intervalRef = useRef(null);
 
   const fetchCart = () => {
     fetch(`${process.env.REACT_APP_API_URL}/cart/getCart`, {
@@ -27,12 +28,14 @@ const CartPage = () => {
     // Fetch cart data initially
     fetchCart();
 
-    // Polling interval in milliseconds (e.g., every 5 seconds)
-    const interval = setInterval(fetchCart, 5000);
+    // Set up polling interval
+    intervalRef.current = setInterval(fetchCart, 5000);
 
     // Clean up the interval on component unmount
-    return () => clearInterval(interval);
-  }, []); // Run only once on component mount
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <Container>
