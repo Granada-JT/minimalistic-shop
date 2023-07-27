@@ -15,7 +15,7 @@ export default function AddProduct(){
   }, []);
 
   function fetchData() {
-    fetch('http://localhost:4000/products')
+    fetch(`${process.env.REACT_APP_API_URL}/products`)
       .then((res) => res.json())
       .then((data) => {
         setProductsData(data);
@@ -34,7 +34,7 @@ export default function AddProduct(){
 
     let token = localStorage.getItem('token');
 
-    fetch('http://localhost:4000/products/',{
+    fetch(`${process.env.REACT_APP_API_URL}/products/`,{
 
       method: 'POST',
       headers: {
