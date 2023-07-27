@@ -97,7 +97,8 @@
 /* EditProduct CSS */
 #editButton,
 #archiveButton,
-#activateButton {
+#activateButton,
+#checkoutButton {
   border-radius: 10px;
   border: none;
   width: 100%;
@@ -120,7 +121,8 @@
   background-color: #CC3939;
 }
 
-#activateButton {
+#activateButton,
+#checkoutButton {
   background-color: #508E4A;
 }
 

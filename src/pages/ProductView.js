@@ -127,7 +127,7 @@ export default function ProductView() {
 							</ListGroup.Item>
 						</ListGroup>
 						<Row>
-							<Col lg={6}>
+							<Col>
 								<Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
 								{user.id !== null ?
 								<Button
@@ -148,15 +148,6 @@ export default function ProductView() {
 									Add to Cart
 								</Button>
 								}
-								</Card.Body>
-							</Col>
-
-							 {/* Still need to edit this after doing the dedicated checkout page, because this must redirect to the checkout page and skip the add to cart function. */}
-							<Col lg={6}>
-								<Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
-								<Button type="submit" id="submitBtn" className="mx-2 btn-lg w-100 border-0" style={{ backgroundColor: '#CC3939' }}>
-									Buy Now
-								</Button>
 								</Card.Body>
 							</Col>
 						</Row>

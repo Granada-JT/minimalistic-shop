@@ -102,12 +102,6 @@ export default function ProductCard({productProp}) {
                         }
                         </>
                     </Col>
-                    <Col className="d-flex justify-content-center">
-                    <Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#CC3939' }}>
-                    Buy Now
-                    </Button>
-                    </Col>
-
             </Card.Body>
         </Card>
     );
