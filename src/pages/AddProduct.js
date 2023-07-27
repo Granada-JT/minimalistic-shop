@@ -26,6 +26,7 @@ export default function AddProduct(){
   const [name,setName] = useState("");
   const [description,setDescription] = useState("");
   const [price,setPrice] = useState("");
+  const [imgSrc,setImgSrc] = useState("");
 
   function createProduct(e){
 
@@ -45,7 +46,8 @@ export default function AddProduct(){
 
         name: name,
         description: description,
-        price: price
+        price: price,
+        imgSrc: imgSrc
 
       })
     })
@@ -70,7 +72,8 @@ export default function AddProduct(){
 
         setName("")
         setDescription("")
-        setPrice(0);
+        setPrice(0)
+        setImgSrc("");
   }
 
   return (
@@ -141,6 +144,15 @@ export default function AddProduct(){
                     required 
                     value={price} 
                     onChange={e => {setPrice(e.target.value)}}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="my-2">Image Source:</Form.Label>
+                  <Form.Control 
+                    type="string" 
+                    placeholder="Enter Product Image Source" 
+                    required 
+                    value={imgSrc} 
+                    onChange={e => {setImgSrc(e.target.value)}}/>
                 </Form.Group>
                 <Button style={{ backgroundColor: "#CC3939", border: "none"}} type="submit" className="my-5">Create Product</Button>
               </Form>

@@ -6,7 +6,7 @@ import UserContext from '../UserContext';
 
 export default function ProductCard({productProp}) {
 
-    const {_id, name, description, price } = productProp;
+    const {_id, name, description, price, imgSrc } = productProp;
     const { user } = useContext(UserContext);
     const productId = productProp._id;
     const [quantity] = useState(1);
@@ -70,35 +70,46 @@ export default function ProductCard({productProp}) {
   return (
     <Card id="productCard" className='mb-2 mt-4'>
       <Link to={`/products/${_id}`}>
-      <Card.Img id='productCardImg' variant="top" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" />
+        <Card.Img id='productCardImg' variant="top" src={imgSrc} /> {/* Pass the image URL as src */}
       </Link>
-        <Card.Body as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none', height: '300px' }}>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>{description}</Card.Text>
-        </Card.Body>
-        <ListGroup as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none' }} className="list-group-flush border-0">
-            <ListGroup.Item>Price: ₱{price}</ListGroup.Item>
-        </ListGroup>
-        <Card.Body className="d-flex justify-content-center">
-          <Col className="d-flex justify-content-center">
-              <>
-            {user.id !== null ?
-              <Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#3B638C' }}
-              onClick={() => {
-                order(productId);
-                addToCart();
-              }}>
+      <Card.Body as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none', height: '300px' }}>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>{description}</Card.Text>
+      </Card.Body>
+      <ListGroup as={Link} to={`/products/${_id}`} style={{ textDecoration: 'none' }} className="list-group-flush border-0">
+        <ListGroup.Item>Price: ₱{price}</ListGroup.Item>
+      </ListGroup>
+      <Card.Body className="d-flex justify-content-center">
+        <Col className="d-flex justify-content-center">
+          <>
+            {user.id !== null ? (
+              <Button
+                type="submit"
+                id="submitBtn"
+                className="mx-2 border-0"
+                style={{ backgroundColor: '#3B638C' }}
+                onClick={() => {
+                  order(productId);
+                  addToCart();
+                }}
+              >
                 Add to Cart
               </Button>
-              :
-              <Button type="submit" id="submitBtn" className="mx-2 border-0" style={{ backgroundColor: '#3B638C' }}
-              as={Link} to="/login">
+            ) : (
+              <Button
+                type="submit"
+                id="submitBtn"
+                className="mx-2 border-0"
+                style={{ backgroundColor: '#3B638C' }}
+                as={Link}
+                to="/login"
+              >
                 Add to Cart
               </Button>
-              }
-              </>
-          </Col>
-        </Card.Body>
+            )}
+          </>
+        </Col>
+      </Card.Body>
     </Card>
   );
 }

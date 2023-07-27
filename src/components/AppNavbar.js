@@ -18,7 +18,7 @@ export default function AppNavbar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-md-auto my-2 my-lg-0 custom-nav" id="navHome" navbarScroll>
-                        <Nav.Link as={NavLink} to="/" className="mt-3">
+                        <Nav.Link as={NavLink} to="/" className="ms-3 mt-3">
                             Home
                         </Nav.Link>
                         <Nav.Link as={NavLink} to="/products" className="ms-3 mt-3">

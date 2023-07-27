@@ -29,7 +29,7 @@ export default function UserView({productsData}) {
     <>
 {/*       <ProductSearch />
       <ProductSearchByPrice /> */}
-        <Container>
+        <Container className="my-4">
         <Row id="userViewRow">
           {products.map((product, index) => (
             <Col key={index} sm={12} md={6} lg={4} xl={3}>

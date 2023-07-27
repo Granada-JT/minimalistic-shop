@@ -10,6 +10,7 @@ export default function EditProduct({ product, fetchData }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [imgSrc, setImgSrc] = useState('');
     const [showEdit, setShowEdit] = useState(false);
 
     // Function for opening the modal
@@ -21,6 +22,7 @@ export default function EditProduct({ product, fetchData }) {
                 setName(data.name);
                 setDescription(data.description);
                 setPrice(data.price);
+                setImgSrc(data.imgSrc);
             });
 
         setShowEdit(true);
@@ -31,6 +33,7 @@ export default function EditProduct({ product, fetchData }) {
         setName('');
         setDescription('');
         setPrice('');
+        setImgSrc('');
     }
 
     // Function to update the product
@@ -46,7 +49,8 @@ export default function EditProduct({ product, fetchData }) {
             body: JSON.stringify({
                 name: name,
                 description: description,
-                price: price
+                price: price,
+                imgSrc: imgSrc
             })
         })
             .then(res => res.json())
@@ -85,7 +89,7 @@ export default function EditProduct({ product, fetchData }) {
 
                     <Modal.Body>
                         <Form.Group controlId="productName">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label className="my-2">Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 required
@@ -95,7 +99,7 @@ export default function EditProduct({ product, fetchData }) {
                         </Form.Group>
 
                         <Form.Group controlId="productDescription">
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label className="my-2">Description</Form.Label>
                             <Form.Control
                                 type="text"
                                 required
@@ -105,7 +109,7 @@ export default function EditProduct({ product, fetchData }) {
                         </Form.Group>
 
                         <Form.Group controlId="productPrice">
-                            <Form.Label>Price</Form.Label>
+                            <Form.Label className="my-2">Price</Form.Label>
                             <Form.Control
                                 type="number"
                                 required
@@ -113,6 +117,17 @@ export default function EditProduct({ product, fetchData }) {
                                 onChange={e => { setPrice(e.target.value) }}
                             />
                         </Form.Group>
+
+                        <Form.Group controlId="productPrice">
+                            <Form.Label className="my-2">Image Source</Form.Label>
+                            <Form.Control
+                                type="string"
+                                required
+                                value={imgSrc}
+                                onChange={e => { setImgSrc(e.target.value) }}
+                            />
+                        </Form.Group>
+
                     </Modal.Body>
 
                     <Modal.Footer>

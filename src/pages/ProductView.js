@@ -18,6 +18,7 @@ export default function ProductView() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [imgSrc, setImgSrc] = useState("");
 
   useEffect(() => {
     // a fetch request that will retrieve the details of a specific product
@@ -27,6 +28,7 @@ export default function ProductView() {
         setName(data.name);
         setDescription(data.description);
         setPrice(data.price);
+        setImgSrc(data.imgSrc);
       });
   }, [productId]);
 
@@ -89,7 +91,7 @@ export default function ProductView() {
 		<Row className="align-items-center" id="productViewCard">
 			<Col lg={6}>
 				<Card className="my-5 ms-lg-5 d-flex justify-content-center border-0">
-					<Card.Img variant="center" src="https://www.gensh.in/fileadmin/Database/Weapons/Catalyst/kagurasVerity_weapCardA.png" className="m-2" />
+					<Card.Img variant="center" src={imgSrc} className="m-2" />
 				</Card>
 			</Col>
 			<Col lg={6} className="d-flex justify-content-center">

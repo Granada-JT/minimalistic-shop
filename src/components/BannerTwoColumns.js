@@ -15,12 +15,12 @@ export default function Banner({ data }) {
     };
 
     return (
-        <Container className="my-5" style={bannerStyle}>
+        <Container className="my-4" style={bannerStyle}>
             <Row>
-                <Col>
+                <Col lg={6} md={12}>
                     <img src={column1Image} alt="BackgroundImage" style={{ width: '100%' }} />
                 </Col>
-                <Col>
+                <Col lg={6} md={12}>
                     {forms}
                 </Col>
             </Row>
