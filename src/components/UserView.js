@@ -2,10 +2,6 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import '../App.css';
-// import ProductSearch from './CourseSearch';
-// import ProductSearchByPrice from './CourseSearchByPrice';
-
-
 
 export default function UserView({productsData}) {
 

@@ -13,13 +13,11 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  // This function handles form submission for user authentication.
   function authenticateUser(e) {
     e.preventDefault();
     loginUser({ email, password });
   }
 
-  // This function fetches the user details from the back end server for authentication.
   function loginUser(credentials) {
     fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
       method: "POST",
@@ -28,10 +26,8 @@ export default function Login() {
       },
       body: JSON.stringify(credentials)
     })
-      .then(res => res.json())
-      .then(data => {
-
-        // This if statement will store the generated token to the localStorage if the user is successfully authenticated, and will return an error message if the user authentication failed.
+      .then((res) => res.json())
+      .then((data) => {
         if (data.access) {
           localStorage.setItem("token", data.access);
           getUserDetails(data.access);
@@ -43,7 +39,7 @@ export default function Login() {
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         Swal.fire({
           title: "Error",
@@ -53,15 +49,14 @@ export default function Login() {
       });
   }
 
-  // This function retrieves user details after successful login using the access token. It returns a personalized login message with the user's first name.
   function getUserDetails(token) {
     fetch(`${process.env.REACT_APP_API_URL}/users/userDetails`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setUser({
           id: data._id,
           isAdmin: data.isAdmin,
@@ -74,7 +69,7 @@ export default function Login() {
           text: `Welcome back ${data.firstName}!`
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         Swal.fire({
           title: "Error",
@@ -103,7 +98,7 @@ export default function Login() {
             placeholder="Enter email"
             required
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="Password1">
@@ -113,25 +108,21 @@ export default function Login() {
             placeholder="Enter password"
             required
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        {
-          isActive ? (
-            <Button variant="primary" type="submit" id="submitBtn">
-              Login
-            </Button>
-          ) : (
-            <Button variant="danger" type="submit" id="submitBtn" disabled>
-              Login
-            </Button>
-          )
-        }
+        {isActive ? (
+          <Button variant="primary" type="submit" id="submitBtn">
+            Login
+          </Button>
+        ) : (
+          <Button variant="danger" type="submit" id="submitBtn" disabled>
+            Login
+          </Button>
+        )}
       </Form>
     )
-  }
+  };
 
-  return (
-    <BannerTwoColumns data={data}/>
-  )
+  return <BannerTwoColumns data={data} />;
 }

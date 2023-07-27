@@ -8,10 +8,7 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    // Replace 'YOUR_API_URL' with your actual backend API URL for updating the profile
     const apiUrl = `${process.env.REACT_APP_API_URL}/users/profile`;
-
-    // Get the JWT token from wherever you store it (e.g., localStorage, Redux store, etc.)
     const token = localStorage.getItem('token');
 
     const requestBody = {
@@ -30,12 +27,10 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Assuming the backend returns a success message upon updating the profile
         onUpdateUserDetails({ ...user, firstName, lastName, mobileNo });
         setMessage('Update success');
       })
       .catch((error) => {
-        // Handle errors if any
         setMessage('An error occurred while updating the profile.');
       });
   };
@@ -63,7 +58,7 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
     };
 
     fetchUserProfile();
-  }, []); // The empty dependency array ensures this effect runs only once when the component mounts
+  }, []);
 
   return (
     <div className="container mb-3">

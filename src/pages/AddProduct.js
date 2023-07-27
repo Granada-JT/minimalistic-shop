@@ -7,17 +7,14 @@ import UserContext from '../UserContext';
 export default function AddProduct(){
 
   const navigate = useNavigate();
-
   const {user} = useContext(UserContext);
   const [productsData, setProductsData] = useState([]);
 
   useEffect(() => {
-    // Fetch products data and update the state
     fetchData();
   }, []);
 
   function fetchData() {
-    // Fetch products data from the server
     fetch('http://localhost:4000/products')
       .then((res) => res.json())
       .then((data) => {
@@ -26,8 +23,6 @@ export default function AddProduct(){
       .catch((error) => console.log(error));
   }
 
-
-  //input states
   const [name,setName] = useState("");
   const [description,setDescription] = useState("");
   const [price,setPrice] = useState("");
@@ -38,7 +33,6 @@ export default function AddProduct(){
     e.preventDefault();
 
     let token = localStorage.getItem('token');
-    console.log(token);
 
     fetch('http://localhost:4000/products/',{
 
@@ -57,9 +51,6 @@ export default function AddProduct(){
     })
     .then(res => res.json())
     .then(data => {
-
-      //data is the response of the api/server after it's been process as JS object through our res.json() method.
-      console.log(data);
 
       if(data){
         Swal.fire({

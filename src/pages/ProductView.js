@@ -45,9 +45,7 @@ export default function ProductView() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data) {
-			console.log(true);
         } else {
           Swal.fire({
             title: 'Something went wrong',
@@ -68,7 +66,6 @@ export default function ProductView() {
     })
       .then((res) => res.json())
       .then((cart) => {
-        console.log(cart);
         if (cart) {
           Swal.fire({
             icon: 'success',

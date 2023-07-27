@@ -4,7 +4,6 @@ import ArchiveProduct from './ArchiveProduct';
 import EditProduct from './EditProduct';
 import '../App.css'
 
-
 export default function AdminView({productsData, fetchData}) {
 
   // State to store all products 
@@ -12,10 +11,7 @@ export default function AdminView({productsData, fetchData}) {
 
   //Getting the productsData from the products page
   useEffect(() => {
-    console.log(products)
-    console.log(productsData)
     const productsArr = productsData.map(product => {
-      console.log(product)
       return (
         <tr key={product._id}>
           <td>{product._id}</td>
@@ -28,7 +24,7 @@ export default function AdminView({productsData, fetchData}) {
           <td><EditProduct product={product._id} fetchData={fetchData}/></td>  
           <td><ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/></td>  
         </tr>
-        )
+      )
     })
 
     setProducts(productsArr)
@@ -57,7 +53,5 @@ export default function AdminView({productsData, fetchData}) {
         </Table>
       </Container>
     </>
-    
-
   )
 }

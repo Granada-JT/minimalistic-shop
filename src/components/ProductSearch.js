@@ -38,11 +38,15 @@ const ProductSearch = () => {
         Search
       </button>
       <h3>Search Results:</h3>
-      <ul>
-        {searchResults.map(product => (
-          <ProductCard productProp={product} key={product._id} />
-        ))}
-      </ul>
+      {searchResults.length > 0 ? (
+        <ul>
+          {searchResults.map(product => (
+            <ProductCard productProp={product} key={product._id} />
+          ))}
+        </ul>
+      ) : (
+        <p>No results found.</p>
+      )}
     </div>
   );
 };

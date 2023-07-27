@@ -1,88 +1,73 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { Route, Routes } from 'react-router-dom';
-import {UserProvider } from'./UserContext';
+import { UserProvider } from './UserContext';
 import { useState, useEffect } from 'react';
+import AddProduct from './pages/AddProduct';
 import AppNavbar from './components/AppNavbar';
 import Cart from './pages/Cart';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
 import Products from './pages/Products';
 import ProductView from './pages/ProductView';
-import AddProduct from './pages/AddProduct';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
 
 function App() {
-
-  // This state hook is for the user state that's defined here for a global.
-  const [user, setUser] = useState({ 
+  const [user, setUser] = useState({
     id: null,
     isAdmin: null
   });
 
-  // Function for clearing the localStorage to logout the user.
   const unsetUser = () => {
     localStorage.clear();
-  }
+  };
 
   useEffect(() => {
-
     fetch(`${process.env.REACT_APP_API_URL}/users/userDetails`, {
       headers: {
-        Authorization: `Bearer ${ localStorage.getItem('token') }`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      // Set the user states values with the user details upon successful login.
-      if (typeof data._id !== "undefined") {
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (typeof data._id !== 'undefined') {
+          setUser({
+            id: data._id,
+            isAdmin: data.isAdmin
+          });
+        } else {
+          setUser({
+            id: null,
+            isAdmin: null
+          });
+        }
+      });
+  }, []);
 
-        setUser({
-          id: data._id,
-          isAdmin: data.isAdmin
-        });
-
-      // Else set the user states to the initial values
-      } else {
-
-        setUser({
-          id: null,
-          isAdmin: null
-        });
-
-      }
-
-    })
-
-    }, []);
-
-  // Used to check if the user information is properly stored upon login and the localStorage information is cleared out upon logout.
   useEffect(() => {
     console.log(user);
     console.log(localStorage);
-  }, [user])
-  
+  }, [user]);
+
   return (
-    
-    <UserProvider value={{user, setUser, unsetUser}}>
+    <UserProvider value={{ user, setUser, unsetUser }}>
       <Router>
         <Container fluid>
           <AppNavbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products/" element={<Products/>} />
-            <Route path="/products/:productId" element={<ProductView/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/logout" element={<Logout/>} />
-            <Route path="/addProduct" element={<AddProduct/>} />
-            <Route path="/*" element={<Error/>} />            
-            <Route path="/cart" element={<Cart/>} />            
+            <Route path="/products/*" element={<Products />} />
+            <Route path="/products/:productId" element={<ProductView />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/addProduct" element={<AddProduct />} />
+            <Route path="/*" element={<Error />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </Container>
       </Router>
