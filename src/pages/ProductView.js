@@ -50,9 +50,8 @@ export default function ProductView() {
         if (data) {
         } else {
           Swal.fire({
-            title: 'Something went wrong',
-            icon: 'error',
-            text: 'Please try again.',
+            title: 'Quantity is defaulted back to 1',
+            text: 'Order request has been received.',
           });
         }
       });
