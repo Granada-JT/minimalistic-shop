@@ -15,7 +15,7 @@ export default function EditProduct({ product, fetchData }) {
 
     // Function for opening the modal
     const openEdit = (productId) => {
-        fetch(`http://localhost:4000/products/${productId}`)
+        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
             .then(res => res.json())
             .then(data => {
                 setProductId(data._id);
@@ -40,7 +40,7 @@ export default function EditProduct({ product, fetchData }) {
     const editProduct = (e, productId) => {
         e.preventDefault();
 
-        fetch(`http://localhost:4000/products/${productId}/updateProduct`, {
+        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/updateProduct`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
