@@ -20,7 +20,7 @@ export default function AddProduct(){
       .then((data) => {
         setProductsData(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   const [name,setName] = useState("");

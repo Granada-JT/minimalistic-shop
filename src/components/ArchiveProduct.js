@@ -13,7 +13,6 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         if (data === true) {
           Swal.fire({
             title: 'Success',
@@ -42,7 +41,6 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         if (data === true) {
           Swal.fire({
             title: 'Success',

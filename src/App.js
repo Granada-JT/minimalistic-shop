@@ -32,7 +32,6 @@ function App() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (typeof data._id !== 'undefined') {
           setUser({
             id: data._id,
@@ -46,11 +45,6 @@ function App() {
         }
       });
   }, []);
-
-  useEffect(() => {
-    console.log(user);
-    console.log(localStorage);
-  }, [user]);
 
   return (
     <UserProvider value={{ user, setUser, unsetUser }}>
