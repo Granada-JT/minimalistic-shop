@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import '../App.css';
+import React, { useEffect, useState, useRef } from "react";
+import { Container, Table, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import "../App.css";
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState('');
+  const [totalPrice, setTotalPrice] = useState("");
   const intervalRef = useRef(null);
 
   const fetchCart = () => {
     fetch(`${process.env.REACT_APP_API_URL}/cart/getCart`, {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      cache: 'no-store',
+      cache: "no-store",
     })
       .then((response) => response.json())
       .then((data) => {
@@ -37,60 +37,69 @@ const CartPage = () => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, []); 
+  }, []);
 
   const handleCheckout = async (cartItemId) => {
     try {
       const { value: paymentMethod } = await Swal.fire({
-        title: 'Select Payment Method',
-        input: 'select',
+        title: "Select Payment Method",
+        input: "select",
         inputOptions: {
-          COD: 'Cash on Delivery',
-          debitCard: 'Debit Card',
+          COD: "Cash on Delivery",
+          debitCard: "Debit Card",
         },
-        inputPlaceholder: 'Select payment method',
+        inputPlaceholder: "Select payment method",
         showCancelButton: true,
       });
 
       if (paymentMethod) {
-        const createCheckoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/checkout/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        const createCheckoutResponse = await fetch(
+          `${process.env.REACT_APP_API_URL}/checkout/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              cartItemId,
+              paymentMethod,
+            }),
           },
-          body: JSON.stringify({
-            cartItemId,
-            paymentMethod,
-          }),
-        });
+        );
 
         const createCheckoutData = await createCheckoutResponse.json();
 
         if (createCheckoutData === true) {
-          const getCheckoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/users/getCheckout`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+          const getCheckoutResponse = await fetch(
+            `${process.env.REACT_APP_API_URL}/users/getCheckout`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
             },
-          });
+          );
 
           const getCheckoutData = await getCheckoutResponse.json();
 
           if (getCheckoutData) {
-            Swal.fire('Checkout Successful', 'Please wait for your item\'s delivery', 'success');
+            Swal.fire(
+              "Checkout Successful",
+              "Please wait for your item's delivery",
+              "success",
+            );
             fetchCart(); // Refresh cart data after successful checkout
-
           } else {
-            Swal.fire('Failed to Checkout', '', 'error');
+            Swal.fire("Failed to Checkout", "", "error");
           }
         } else {
-          Swal.fire('Failed to Checkout', '', 'error');
+          Swal.fire("Failed to Checkout", "", "error");
         }
       }
     } catch (error) {
-      Swal.fire('Failed to Checkout', '', 'error');
+      Swal.fire("Failed to Checkout", "", "error");
     }
   };
 
@@ -112,7 +121,7 @@ const CartPage = () => {
           <tbody>
             {cart.map((item) => {
               const cartItemId = item.productId._id; // Create a const declaration for cartItemId
-  
+
               return (
                 <tr key={item.productId}>
                   <td>{item.productId.name}</td>
@@ -120,7 +129,12 @@ const CartPage = () => {
                   <td>{item.quantity}</td>
                   <td>{item.subTotal}</td>
                   <td>
-                    <Button id="checkoutButton" onClick={() => handleCheckout(item._id)}>Checkout</Button>
+                    <Button
+                      id="checkoutButton"
+                      onClick={() => handleCheckout(item._id)}
+                    >
+                      Checkout
+                    </Button>
                   </td>
                 </tr>
               );
@@ -135,7 +149,6 @@ const CartPage = () => {
       )}
     </Container>
   );
-  
 };
 
 export default CartPage;

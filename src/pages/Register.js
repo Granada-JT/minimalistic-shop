@@ -1,215 +1,224 @@
-import { useState, useEffect, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
-import BannerTwoColumns from '../components/BannerTwoColumns';
-import Swal from 'sweetalert2';
-import UserContext from '../UserContext';
-import bgImage from '../images/background-signUpPage.jpg';
-import colImage from '../images/colImage-signUpPage.webp';
+import { useState, useEffect, useContext } from "react";
+import { Form, Button } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
+import BannerTwoColumns from "../components/BannerTwoColumns";
+import Swal from "sweetalert2";
+import UserContext from "../UserContext";
+import bgImage from "../images/background-signUpPage.jpg";
+import colImage from "../images/colImage-signUpPage.webp";
 
 export default function Register() {
+  const { user } = useContext(UserContext);
 
-	const {user} = useContext(UserContext);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [mobileNo, setMobileNo] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
-	const [ isActive, setIsActive] = useState(false);
+  // This function executes duplicate checks for mobile number and email address. It will register the new user if no duplicates are found.
+  function registerUser(e) {
+    // This code block prevents the page redirection via form submission.
+    e.preventDefault();
 
-    // This function executes duplicate checks for mobile number and email address. It will register the new user if no duplicates are found.
-	function registerUser(e) {
-
-		// This code block prevents the page redirection via form submission.
-		e.preventDefault();
-
-
-        // This code block checks if the email address is already registered.
-		fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				email: email
-			})
-		})
-		.then(res => res.json())
-		.then(data => {
-
-			if(data) {
+    // This code block checks if the email address is already registered.
+    fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          Swal.fire({
+            title: "Registration Failed",
+            icon: "error",
+            text: "This email address you entered is already registered. Please login or try again.",
+          });
+        } else {
+          fetch(`${process.env.REACT_APP_API_URL}/users/registration`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              mobileNo: mobileNo,
+              password: password,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.access) {
+                setFirstName("");
+                setLastName("");
+                setEmail("");
+                setMobileNo("");
+                setPassword("");
+                setConfirmPassword("");
 
                 Swal.fire({
-                    title: "Registration Failed",
-                    icon: "error",
-                    text: "This email address you entered is already registered. Please login or try again.",
-                  });
+                  title: "Registration Successful",
+                  icon: "success",
+                  text: `Welcome, ${firstName} !`,
+                });
+              } else if (!data.access) {
+                Swal.fire({
+                  title: "Registration Failed",
+                  icon: "error",
+                  text: "The mobile number you entered is already registered. Please log in or use a different mobile number.",
+                });
+              } else {
+                Swal.fire({
+                  title: "Registration Failed",
+                  icon: "error",
+                  text: "Sorry, there was an error during registration. Please try again later.",
+                });
+              }
+            });
+        }
+      });
+  }
 
-			} else {
+  // This useEffect enables and disables the register button depending if the form fields has user input.
+  useEffect(() => {
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      mobileNo !== "" &&
+      password !== "" &&
+      confirmPassword !== "" &&
+      password === confirmPassword &&
+      mobileNo.length === 11
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [firstName, lastName, email, mobileNo, password, confirmPassword]);
 
-				fetch(`${process.env.REACT_APP_API_URL}/users/registration`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						firstName: firstName,
-						lastName: lastName,
-						email: email,
-						mobileNo: mobileNo,
-						password: password
-					})
-				})
-				.then(res => res.json())
-				.then(data => {
+  const data = {
+    backgroundImage: bgImage,
+    column1Image: colImage,
+    forms:
+      // This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
+      user.id !== null ? (
+        <Navigate to="/products" />
+      ) : (
+        <Form onSubmit={(e) => registerUser(e)}>
+          <h2 className="my-5 text-center">Sign Up</h2>
 
-					if(data.access) {
+          <Form.Group className="mb-3" controlId="First Name">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your first name"
+              required
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-						setFirstName("");
-						setLastName("");
-						setEmail("");
-						setMobileNo("");
-						setPassword("");
-						setConfirmPassword("");
+          <Form.Group className="mb-3" controlId="Last Name">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your last name"
+              required
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-                        Swal.fire({
-                            title: "Registration Successful",
-                            icon: "success",
-                            text: `Welcome, ${firstName} !`
-                        });
+          <Form.Group className="mb-3" controlId="Email address">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter your email e.g.(name@example.com)"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-					} else if(!data.access) {
+          <Form.Group className="mb-3" controlId="Mobile No">
+            <Form.Label>Mobile No:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your 11 digit mobile no."
+              required
+              value={mobileNo}
+              onChange={(e) => {
+                setMobileNo(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-                        Swal.fire({
-                            title: "Registration Failed",
-                            icon: "error",
-                            text: "The mobile number you entered is already registered. Please log in or use a different mobile number."
-                        });
+          <Form.Group className="mb-3" controlId="Password1">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter your password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-                    } else {
+          <Form.Group className="mb-3" controlId="Password2">
+            <Form.Label>Confirm Password:</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm your password"
+              required
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-                        Swal.fire({
-                            title: "Registration Failed",
-                            icon: "error",
-                            text: "Sorry, there was an error during registration. Please try again later."
-                        });
+          {isActive ? (
+            <Button
+              variant="primary"
+              type="submit"
+              id="submitBtn"
+              className="mb-5"
+            >
+              Sign Up
+            </Button>
+          ) : (
+            <Button
+              variant="danger"
+              type="submit"
+              id="submitBtn"
+              className="mb-5"
+              disabled
+            >
+              Sign Up
+            </Button>
+          )}
+        </Form>
+      ),
+  };
 
-					}
-
-				})
-			}
-
-		})
-
-	};
-
-    // This useEffect enables and disables the register button depending if the form fields has user input.
-	useEffect(() => {
-
-		if((firstName !== "" && lastName !== "" && email !== "" && mobileNo !== "" && password !== "" && confirmPassword !== "") && (password === confirmPassword) && (mobileNo.length === 11)) {
-				setIsActive(true)
-		} else {
-
-				setIsActive(false)
-
-		}
-
-	}, [firstName, lastName, email, mobileNo, password, confirmPassword]);
-
-	const data = {
-		backgroundImage: bgImage,
-		column1Image: colImage,
-		forms: 
-		
-		// This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
-		(user.id !== null) ?
-			<Navigate to="/products" />
-		:
-			<Form onSubmit={e => registerUser(e)}>
-			  <h2 className="my-5 text-center">Sign Up</h2>
-
-			  <Form.Group className="mb-3" controlId="First Name">
-			    <Form.Label>First Name</Form.Label>
-			    <Form.Control 
-			    	type="text" 
-			    	placeholder="Enter your first name" 
-			    	required
-			    	value={firstName}
-			    	onChange={e => {setFirstName(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  <Form.Group className="mb-3" controlId="Last Name">
-			    <Form.Label>Last Name</Form.Label>
-			    <Form.Control 
-			    	type="text" 
-			    	placeholder="Enter your last name" 
-			    	required 
-			    	value={lastName}
-			    	onChange={e => {setLastName(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  <Form.Group className="mb-3" controlId="Email address">
-			    <Form.Label>Email address</Form.Label>
-			    <Form.Control 
-			    	type="email" 
-			    	placeholder="Enter your email e.g.(name@example.com)"  
-			    	required
-			    	value={email}
-			    	onChange={e => {setEmail(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  <Form.Group className="mb-3" controlId="Mobile No">
-			    <Form.Label>Mobile No:</Form.Label>
-			    <Form.Control 
-			    	type="text" 
-			    	placeholder="Enter your 11 digit mobile no."
-			    	required 
-			    	value={mobileNo}
-			    	onChange={e => {setMobileNo(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  <Form.Group className="mb-3" controlId="Password1">
-			    <Form.Label>Password</Form.Label>
-			    <Form.Control 
-			    	type="password" 
-			    	placeholder="Enter your password" 
-			    	required 
-			    	value={password}
-			    	onChange={e => {setPassword(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  <Form.Group className="mb-3" controlId="Password2">
-			    <Form.Label>Confirm Password:</Form.Label>
-			    <Form.Control 
-			    	type="password" 
-			    	placeholder="Confirm your password" 
-			    	required 
-			    	value={confirmPassword}
-			    	onChange={e => {setConfirmPassword(e.target.value)}}
-			    />
-			  </Form.Group>
-
-			  {
-			  	isActive 
-			  		? <Button variant="primary" type="submit" id="submitBtn" className="mb-5">Sign Up</Button>
-			  		: <Button variant="danger" type="submit" id="submitBtn" className="mb-5" disabled>Sign Up</Button>
-			  }
-
-			</Form>
-	}
-
-	return (
-
-		<BannerTwoColumns data={data} />
-        
-	)
-
-};
+  return <BannerTwoColumns data={data} />;
+}

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import AdminView from '../components/AdminView';
-import UserContext from '../UserContext';
-import UserView from '../components/UserView';
+import React, { useEffect, useState, useContext } from "react";
+import AdminView from "../components/AdminView";
+import UserContext from "../UserContext";
+import UserView from "../components/UserView";
 
 export default function Products() {
   const { user } = useContext(UserContext);

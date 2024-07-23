@@ -1,17 +1,16 @@
-import { Container, Table } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
-import ArchiveProduct from './ArchiveProduct';
-import EditProduct from './EditProduct';
-import '../App.css'
+import { Container, Table } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import ArchiveProduct from "./ArchiveProduct";
+import EditProduct from "./EditProduct";
+import "../App.css";
 
-export default function AdminView({productsData, fetchData}) {
-
-  // State to store all products 
+export default function AdminView({ productsData, fetchData }) {
+  // State to store all products
   const [products, setProducts] = useState([]);
 
   //Getting the productsData from the products page
   useEffect(() => {
-    const productsArr = productsData.map(product => {
+    const productsArr = productsData.map((product) => {
       return (
         <tr key={product._id}>
           <td>{product._id}</td>
@@ -21,19 +20,25 @@ export default function AdminView({productsData, fetchData}) {
           <td className={product.isActive ? "text-success" : "text-danger"}>
             {product.isActive ? "Available" : "Unavailable"}
           </td>
-          <td><EditProduct product={product._id} fetchData={fetchData}/></td>  
-          <td><ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/></td>  
+          <td>
+            <EditProduct product={product._id} fetchData={fetchData} />
+          </td>
+          <td>
+            <ArchiveProduct
+              product={product._id}
+              isActive={product.isActive}
+              fetchData={fetchData}
+            />
+          </td>
         </tr>
-      )
-    })
+      );
+    });
 
-    setProducts(productsArr)
+    setProducts(productsArr);
+  }, [productsData]);
 
-  }, [productsData])
-
-  return(
-    
-    <>    
+  return (
+    <>
       <Container>
         <Table id="custom-table" striped bordered hover responsive>
           <thead>
@@ -43,15 +48,15 @@ export default function AdminView({productsData, fetchData}) {
               <th>Description</th>
               <th>Price</th>
               <th>Availability</th>
-              <th colSpan="2" id="buttonCell">Actions</th>
+              <th colSpan="2" id="buttonCell">
+                Actions
+              </th>
             </tr>
           </thead>
-    
-          <tbody>
-            {products}
-          </tbody>
+
+          <tbody>{products}</tbody>
         </Table>
       </Container>
     </>
-  )
+  );
 }
