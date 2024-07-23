@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage("Passwords do not match");
       return;
     }
 
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/reset-password`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/users/reset-password`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ newPassword: password }),
         },
-        body: JSON.stringify({ newPassword: password }),
-      });
+      );
 
       if (response.ok) {
-        setMessage('Password reset successfully');
-        setPassword('');
-        setConfirmPassword('');
+        setMessage("Password reset successfully");
+        setPassword("");
+        setConfirmPassword("");
       } else {
         const errorData = await response.json();
         setMessage(errorData.message);
       }
     } catch (error) {
-      setMessage('An error occurred. Please try again.');
+      setMessage("An error occurred. Please try again.");
       console.error(error);
     }
   };

@@ -52,7 +52,7 @@
 
 /* ProductView CSS */
 #productViewCard {
-  background-image: url('./images/background-productView.jpg');
+  background-image: url("./images/background-productView.jpg");
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
@@ -69,7 +69,7 @@
   margin-top: 20px;
   border-radius: 15px;
   border-collapse: separate;
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -78,14 +78,14 @@
 #custom-table td {
   padding: 20px;
   border-radius: 15px;
-  text-align: center; 
+  text-align: center;
   position: relative;
   vertical-align: middle;
   box-sizing: border-box;
 }
 
 #custom-table th {
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   font-weight: bold;
   border: none;
 }
@@ -114,16 +114,16 @@
 }
 
 #editButton {
-  background-color: #3B638C;
+  background-color: #3b638c;
 }
 
 #archiveButton {
-  background-color: #CC3939;
+  background-color: #cc3939;
 }
 
 #activateButton,
 #checkoutButton {
-  background-color: #508E4A;
+  background-color: #508e4a;
 }
 
 #buttonCell {
@@ -132,7 +132,7 @@
 
 /* AddProduct CSS */
 #addProductRow {
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
@@ -146,7 +146,7 @@
 
 /* UserView CSS */
 #userViewRow {
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
@@ -156,8 +156,6 @@
   margin-top: 1.5rem;
   min-height: 79vh;
 }
-
-
 
 /* ProductCard CSS */
 #productCard {
@@ -176,7 +174,7 @@
   margin-top: 20px;
   border-radius: 15px;
   border-collapse: separate;
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -185,14 +183,14 @@
 #cartTable td {
   padding: 20px;
   border-radius: 15px;
-  text-align: center; 
+  text-align: center;
   position: relative;
   vertical-align: middle;
   box-sizing: border-box;
 }
 
 #cartTable th {
-  background-color: #E7E6E6;
+  background-color: #e7e6e6;
   font-weight: bold;
   border: none;
 }
@@ -203,7 +201,7 @@
 
 /* Profile CSS */
 #profileContainer {
-  background-image: url('./images/background-productView.jpg');
+  background-image: url("./images/background-productView.jpg");
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
@@ -226,5 +224,5 @@
 
 #profilePic {
   border-radius: 50%;
-  border: 5px solid #E7E6E6;
+  border: 5px solid #e7e6e6;
 }

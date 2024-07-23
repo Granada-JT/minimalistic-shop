@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const UpdateProfile = ({ onUpdateUserDetails, user }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [message, setMessage] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const apiUrl = `${process.env.REACT_APP_API_URL}/users/profile`;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     const requestBody = {
       firstName,
@@ -18,9 +18,9 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
     };
 
     fetch(apiUrl, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
@@ -28,23 +28,23 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
       .then((response) => response.json())
       .then((data) => {
         onUpdateUserDetails({ ...user, firstName, lastName, mobileNo });
-        setMessage('Update success');
+        setMessage("Update success");
       })
       .catch((error) => {
-        setMessage('An error occurred while updating the profile.');
+        setMessage("An error occurred while updating the profile.");
       });
   };
 
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_API_URL}/users/profile`;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     const fetchUserProfile = async () => {
       try {
         const response = await fetch(apiUrl, {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });

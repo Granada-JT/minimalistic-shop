@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import { UserProvider } from './UserContext';
-import { useState, useEffect } from 'react';
-import AddProduct from './pages/AddProduct';
-import AppNavbar from './components/AppNavbar';
-import Cart from './pages/Cart';
-import Error from './pages/Error';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Logout from './pages/Logout';
-import Products from './pages/Products';
-import ProductView from './pages/ProductView';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { UserProvider } from "./UserContext";
+import { useState, useEffect } from "react";
+import AddProduct from "./pages/AddProduct";
+import AppNavbar from "./components/AppNavbar";
+import Cart from "./pages/Cart";
+import Error from "./pages/Error";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import Products from "./pages/Products";
+import ProductView from "./pages/ProductView";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 
 function App() {
   const [user, setUser] = useState({
     id: null,
-    isAdmin: null
+    isAdmin: null,
   });
 
   const unsetUser = () => {
@@ -27,30 +27,25 @@ function App() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/users/userDetails`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
-        if (typeof data._id !== 'undefined') {
+        if (typeof data._id !== "undefined") {
           setUser({
             id: data._id,
-            isAdmin: data.isAdmin
+            isAdmin: data.isAdmin,
           });
         } else {
           setUser({
             id: null,
-            isAdmin: null
+            isAdmin: null,
           });
         }
       });
   }, []);
-
-  useEffect(() => {
-    console.log(user);
-    console.log(localStorage);
-  }, [user]);
 
   return (
     <UserProvider value={{ user, setUser, unsetUser }}>
