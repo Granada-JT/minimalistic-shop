@@ -26,7 +26,6 @@ export default function ProductCard({ productProp }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data) {
           console.log(true);
         } else {
@@ -49,7 +48,6 @@ export default function ProductCard({ productProp }) {
     })
       .then((res) => res.json())
       .then((cart) => {
-        console.log(cart);
         if (cart) {
           Swal.fire({
             icon: "success",
