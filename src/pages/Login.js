@@ -1,11 +1,11 @@
-import { Form, Button } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import BannerTwoColumns from '../components/BannerTwoColumns';
-import Swal from 'sweetalert2';
-import UserContext from '../UserContext';
-import bgImage from '../images/background-loginPage.jpg';
-import colImage from '../images/background1-login.webp';
+import { Form, Button } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import BannerTwoColumns from "../components/BannerTwoColumns";
+import Swal from "sweetalert2";
+import UserContext from "../UserContext";
+import bgImage from "../images/background-loginPage.jpg";
+import colImage from "../images/background1-login.webp";
 
 export default function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -22,9 +22,9 @@ export default function Login() {
     fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(credentials),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -35,7 +35,7 @@ export default function Login() {
           Swal.fire({
             title: "Login Failed",
             icon: "error",
-            text: "Please check your login credentials and try again."
+            text: "Please check your login credentials and try again.",
           });
         }
       })
@@ -44,7 +44,7 @@ export default function Login() {
         Swal.fire({
           title: "Error",
           icon: "error",
-          text: "An error occurred. Please try again later."
+          text: "An error occurred. Please try again later.",
         });
       });
   }
@@ -52,21 +52,21 @@ export default function Login() {
   function getUserDetails(token) {
     fetch(`${process.env.REACT_APP_API_URL}/users/userDetails`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         setUser({
           id: data._id,
           isAdmin: data.isAdmin,
-          firstName: data.firstName
+          firstName: data.firstName,
         });
 
         Swal.fire({
           title: "Login Successful",
           icon: "success",
-          text: `Welcome back ${data.firstName}!`
+          text: `Welcome back ${data.firstName}!`,
         });
       })
       .catch((error) => {
@@ -74,7 +74,7 @@ export default function Login() {
         Swal.fire({
           title: "Error",
           icon: "error",
-          text: "An error occurred. Please try again later."
+          text: "An error occurred. Please try again later.",
         });
       });
   }
@@ -86,42 +86,43 @@ export default function Login() {
   const data = {
     backgroundImage: bgImage,
     column1Image: colImage,
-    forms: user.id !== null ? (
-      <Navigate to="/" />
-    ) : (
-      <Form onSubmit={authenticateUser}>
-        <h2 className="my-5 text-center">Login</h2>
-        <Form.Group className="mb-3" controlId="Email address">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="Password1">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        {isActive ? (
-          <Button variant="primary" type="submit" id="submitBtn">
-            Login
-          </Button>
-        ) : (
-          <Button variant="danger" type="submit" id="submitBtn" disabled>
-            Login
-          </Button>
-        )}
-      </Form>
-    )
+    forms:
+      user.id !== null ? (
+        <Navigate to="/" />
+      ) : (
+        <Form onSubmit={authenticateUser}>
+          <h2 className="my-5 text-center">Login</h2>
+          <Form.Group className="mb-3" controlId="Email address">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="Password1">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          {isActive ? (
+            <Button variant="primary" type="submit" id="submitBtn">
+              Login
+            </Button>
+          ) : (
+            <Button variant="danger" type="submit" id="submitBtn" disabled>
+              Login
+            </Button>
+          )}
+        </Form>
+      ),
   };
 
   return <BannerTwoColumns data={data} />;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // Creates a Context object
 // A context object as the name states is a data type of an object that can be used to store information that can be shared to other components within the app
