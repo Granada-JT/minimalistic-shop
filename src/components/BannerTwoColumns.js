@@ -1,4 +1,4 @@
-import { Row, Col, Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Banner({ data }) {
   const { backgroundImage, column1Image, forms } = data;
