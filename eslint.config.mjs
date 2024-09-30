@@ -12,6 +12,9 @@ export default [
       globals: {
         ...globals.node,
         localStorage: true,
+        test: true,
+        expect: true,
+        document: true,
       },
       parserOptions: {
         ecmaFeatures: {
@@ -31,7 +34,7 @@ export default [
           ignoreCase: false,
           ignoreDeclarationSort: false,
           ignoreMemberSort: false,
-          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+          memberSyntaxSortOrder: ["multiple", "single", "none", "all"],
           allowSeparatedGroups: false,
         },
       ],

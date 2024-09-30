@@ -1,18 +1,18 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import { UserProvider } from "./UserContext";
 import { useEffect, useState } from "react";
 import AddProduct from "./pages/AddProduct";
 import AppNavbar from "./components/AppNavbar";
 import Cart from "./pages/Cart";
+import { Container } from "react-bootstrap";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
+import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import { UserProvider } from "./UserContext";
 
 function App() {
   const [user, setUser] = useState({

@@ -56,7 +56,6 @@ export default function ProductView() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-        } else {
           Swal.fire({
             title: "Quantity is defaulted back to 1",
             text: "Order request has been received.",

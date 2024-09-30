@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import ProductCard from "./ProductCard";
+import { useState } from "react";
 
 const ProductSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");

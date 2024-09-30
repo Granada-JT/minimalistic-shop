@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
 import { Col, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
-import { useContext } from "react";
-import cartIcon from "../images/cart.svg";
+import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
+import cartIcon from "../images/cart.svg";
 import searchIcon from "../images/search.svg";
+import { useContext } from "react";
 import "../App.css";
 
 export default function AppNavbar() {
