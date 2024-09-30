@@ -1,28 +1,29 @@
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import pluginJs from "@eslint/js";
+import react from "eslint-plugin-react";
+
 export default [
   {
-    files: ["**/*.js"],
+    files: ["**/*.js", "**/*.jsx"],
     languageOptions: {
       sourceType: "module",
-    },
-  },
-  {
-    languageOptions: {
       ecmaVersion: 2022,
-      globals: globals.node,
+      globals: {
+        ...globals.node,
+        localStorage: true,
+      },
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
-  },
-  pluginJs.configs.recommended,
-  eslintPluginPrettierRecommended,
-  {
+    plugins: {
+      react: react,
+    },
     rules: {
+      "react/jsx-uses-vars": "error",
       "no-undef": "error",
       "sort-imports": [
         "error",
@@ -36,4 +37,6 @@ export default [
       ],
     },
   },
+  pluginJs.configs.recommended,
+  eslintPluginPrettierRecommended,
 ];
