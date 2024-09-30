@@ -26,12 +26,13 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
       body: JSON.stringify(requestBody),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(() => {
         onUpdateUserDetails({ ...user, firstName, lastName, mobileNo });
         setMessage("Update success");
       })
       .catch((error) => {
         setMessage("An error occurred while updating the profile.");
+        console.error(error);
       });
   };
 

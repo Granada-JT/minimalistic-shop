@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-
-import UserContext from "../UserContext";
 import ResetPassword from "../components/ResetPassword";
 import UpdateProfile from "../components/UpdateProfile";
-
+import UserContext from "../UserContext";
 import profilePic from "../images/kokomiDp.webp";
 import "../App.css";
 

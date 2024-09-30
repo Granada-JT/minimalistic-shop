@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AdminView from "../components/AdminView";
 import UserContext from "../UserContext";
 import UserView from "../components/UserView";

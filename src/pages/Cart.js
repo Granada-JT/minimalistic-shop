@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
+import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import "../App.css";
 
@@ -120,8 +120,6 @@ const CartPage = () => {
           </thead>
           <tbody>
             {cart.map((item) => {
-              const cartItemId = item.productId._id; // Create a const declaration for cartItemId
-
               return (
                 <tr key={item.productId}>
                   <td>{item.productId.name}</td>
