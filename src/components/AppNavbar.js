@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { Col, Container, Form, Navbar, Nav, Row } from "react-bootstrap";
+import { Col, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 import { useContext } from "react";
 import cartIcon from "../images/cart.svg";
 import UserContext from "../UserContext";

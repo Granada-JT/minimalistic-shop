@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Row, Col, Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Banner({ data }) {
   const { title, content, destination, label, backgroundImage } = data;

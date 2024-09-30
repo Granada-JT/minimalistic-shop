@@ -5,12 +5,18 @@ export default [
   {
     files: ["**/*.js"],
     languageOptions: {
-      sourceType: "commonjs",
+      sourceType: "module",
     },
   },
   {
     languageOptions: {
+      ecmaVersion: 2022,
       globals: globals.node,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
   },
   pluginJs.configs.recommended,

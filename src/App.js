@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { UserProvider } from "./UserContext";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddProduct from "./pages/AddProduct";
 import AppNavbar from "./components/AppNavbar";
 import Cart from "./pages/Cart";

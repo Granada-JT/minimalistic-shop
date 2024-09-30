@@ -1,5 +1,5 @@
 import { Container, Table } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ArchiveProduct from "./ArchiveProduct";
 import EditProduct from "./EditProduct";
 import "../App.css";
