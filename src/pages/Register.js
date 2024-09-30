@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import BannerTwoColumns from "../components/BannerTwoColumns";
+import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UserContext from "../UserContext";
 import bgImage from "../images/background-signUpPage.jpg";

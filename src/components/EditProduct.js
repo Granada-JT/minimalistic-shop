@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { useState } from "react";
 import "../App.css";
 
 // This component represents the edit product modal
