@@ -23,6 +23,12 @@ function App() {
 
   ReactGA.initialize(process.env.REACT_APP_GA_M_ID);
 
+  ReactGA.send({
+    hitType: 'pageview',
+    page: window.location.pathname + window.location.search,
+    title: 'Minimalistic Shop'
+  })
+
   const unsetUser = () => {
     localStorage.clear();
   };
