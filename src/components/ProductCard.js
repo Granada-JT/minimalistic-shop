@@ -26,9 +26,7 @@ export default function ProductCard({ productProp }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
-          console.log(true);
-        } else {
+        if (!data) {
           Swal.fire({
             title: "Something went wrong",
             icon: "error",
