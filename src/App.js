@@ -11,6 +11,7 @@ import Logout from "./pages/Logout";
 import ProductView from "./pages/ProductView";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
+import ReactGA from "react-ga4";
 import Register from "./pages/Register";
 import { UserProvider } from "./UserContext";
 
@@ -19,6 +20,8 @@ function App() {
     id: null,
     isAdmin: null,
   });
+
+  ReactGA.initialize(process.env.REACT_APP_GA_M_ID);
 
   const unsetUser = () => {
     localStorage.clear();
