@@ -25,22 +25,6 @@ function App() {
   };
 
   useEffect(() => {
-    const gtag = document.getElementById("gtag");
-    if (gtag) {
-      gtag.outerHTML = `
-        <script async src='https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GA_M_ID}'></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${process.env.REACT_APP_GA_M_ID}');
-        </script>
-      `;
-    }
-  }, []);
-
-  useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/users/userDetails`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
