@@ -1,14 +1,11 @@
 import { Col, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
-import cartIcon from "../images/cart.svg";
-import searchIcon from "../images/search.svg";
 import { useContext } from "react";
 import "../App.css";
 
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
-  const location = useLocation();
 
   return (
     <Navbar expand="lg" style={{ height: "94px" }}>
@@ -75,36 +72,6 @@ export default function AppNavbar() {
               </>
             )}
           </Nav>
-          {location.pathname === "/products" && (
-            <Row className="align-items-center mt-3">
-              <Col md={8} className="mb-2 mb-md-0">
-                <Form>
-                  <Form.Control
-                    type="search"
-                    placeholder="Search products"
-                    aria-label="Search"
-                    style={{ fontSize: "12px", width: "100%" }}
-                  />
-                </Form>
-              </Col>
-              <Col md={2}>
-                <Nav.Link style={{ width: "100%", padding: "auto" }}>
-                  <img src={searchIcon} alt="Search" />
-                </Nav.Link>
-              </Col>
-              {user.id !== null && !user.isAdmin && (
-                <Col md={2}>
-                  <Nav.Link
-                    as={NavLink}
-                    to="/cart"
-                    style={{ width: "100%", padding: "auto" }}
-                  >
-                    <img src={cartIcon} alt="cart" />
-                  </Nav.Link>
-                </Col>
-              )}
-            </Row>
-          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
