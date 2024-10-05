@@ -1,4 +1,4 @@
-import { Col, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
 import { useContext } from "react";
@@ -21,7 +21,16 @@ export default function AppNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
-            className="me-md-auto my-2 my-lg-0 custom-nav"
+            className="
+              me-md-auto
+              my-2
+              my-lg-0
+              custom-nav
+              d-flex
+              align-items-center
+              justify-content-end
+              w-100
+            "
             id="navHome"
             navbarScroll
           >
