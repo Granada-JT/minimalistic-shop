@@ -1,8 +1,6 @@
-import { Col, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
-import cartIcon from "../images/cart.svg";
-import searchIcon from "../images/search.svg";
 import { useContext } from "react";
 import "../App.css";
 
@@ -18,14 +16,22 @@ export default function AppNavbar() {
           className="mt-3"
           style={{ fontSize: "24px", fontWeight: "bold" }}
         >
-          My Shop
+          Minimalistic Shop
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
-            className="me-md-auto my-2 my-lg-0 custom-nav"
+            className="
+              me-md-auto
+              my-2
+              my-lg-0
+              custom-nav
+              d-flex
+              align-items-center
+              justify-content-end
+              w-100
+            "
             id="navHome"
-            navbarScroll
           >
             <Nav.Link as={NavLink} to="/" className="ms-3 mt-3">
               Home
@@ -74,34 +80,6 @@ export default function AppNavbar() {
               </>
             )}
           </Nav>
-          <Row className="align-items-center mt-3">
-            <Col md={8} className="mb-2 mb-md-0">
-              <Form>
-                <Form.Control
-                  type="search"
-                  placeholder="Search products"
-                  aria-label="Search"
-                  style={{ fontSize: "12px", width: "100%" }}
-                />
-              </Form>
-            </Col>
-            <Col md={2}>
-              <Nav.Link style={{ width: "100%", padding: "auto" }}>
-                <img src={searchIcon} alt="Search" />
-              </Nav.Link>
-            </Col>
-            {user.id !== null && !user.isAdmin && (
-              <Col md={2}>
-                <Nav.Link
-                  as={NavLink}
-                  to="/cart"
-                  style={{ width: "100%", padding: "auto" }}
-                >
-                  <img src={cartIcon} alt="cart" />
-                </Nav.Link>
-              </Col>
-            )}
-          </Row>
         </Navbar.Collapse>
       </Container>
     </Navbar>

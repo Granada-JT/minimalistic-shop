@@ -44,7 +44,17 @@ export default function UserView({ productsData, isLoading }) {
         ) : (
           <Row id="userViewRow">
             {products.map((product, index) => (
-              <Col key={index} sm={12} md={6} lg={4} xl={3}>
+              <Col
+                key={index}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                className="
+                  mt-2
+                  mb-2
+                "
+              >
                 {product}
               </Col>
             ))}
