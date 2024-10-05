@@ -32,7 +32,6 @@ export default function AppNavbar() {
               w-100
             "
             id="navHome"
-            navbarScroll
           >
             <Nav.Link as={NavLink} to="/" className="ms-3 mt-3">
               Home
