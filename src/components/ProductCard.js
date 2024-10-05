@@ -1,18 +1,23 @@
 import { Button, Card, Col, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Swal from "sweetalert2";
 import UserContext from "../UserContext";
 
 export default function ProductCard({ productProp }) {
-  const { _id, name, description, price, imgSrc } = productProp;
+  const {
+    _id,
+    name,
+    description,
+    price,
+    imgSrc
+  } = productProp;
   const { user } = useContext(UserContext);
-  const productId = productProp._id;
-  const [quantity] = useState(1);
+  const quantity = 1;
   const navigate = useNavigate();
 
   // This code block is used to create an order and automatically add it to the cart.
-  const order = (productId) => {
+  const order = (_id) => {
     fetch(`${process.env.REACT_APP_API_URL}/orders/createOrder`, {
       method: "POST",
       headers: {
@@ -20,7 +25,7 @@ export default function ProductCard({ productProp }) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        productId: productId,
+        productId: _id,
         quantity: quantity,
       }),
     })
@@ -63,18 +68,32 @@ export default function ProductCard({ productProp }) {
   };
 
   return (
-    <Card id="productCard" className="mb-2 mt-4">
+    <Card
+      id="productCard"
+      style={{
+        height: "100%",
+        maxHeight: "550px",
+      }}
+    >
       <Link to={`/products/${_id}`}>
-        <Card.Img id="productCardImg" variant="top" src={imgSrc} />{" "}
-        {/* Pass the image URL as src */}
+        <Card.Img id="productCardImg" variant="top" src={imgSrc} />
       </Link>
       <Card.Body
         as={Link}
         to={`/products/${_id}`}
-        style={{ textDecoration: "none", height: "300px" }}
+        style={{
+          textDecoration: "none",
+          height: "100%",
+        }}
       >
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+        <Card.Title>
+          {name.length > 50 ? `${name.slice(0, 50)}...` : name}
+        </Card.Title>
+        <Card.Text className="p-1">
+          {description.length > 60
+            ? `${description.slice(0, 60)}...`
+            : description}
+        </Card.Text>
       </Card.Body>
       <ListGroup
         as={Link}
@@ -94,7 +113,7 @@ export default function ProductCard({ productProp }) {
                 className="mx-2 border-0"
                 style={{ backgroundColor: "#3B638C" }}
                 onClick={() => {
-                  order(productId);
+                  order(_id);
                   addToCart();
                 }}
               >
