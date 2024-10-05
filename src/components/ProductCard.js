@@ -1,17 +1,11 @@
 import { Button, Card, Col, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import Swal from "sweetalert2";
 import UserContext from "../UserContext";
+import { useContext } from "react";
 
 export default function ProductCard({ productProp }) {
-  const {
-    _id,
-    name,
-    description,
-    price,
-    imgSrc
-  } = productProp;
+  const { _id, name, description, price, imgSrc } = productProp;
   const { user } = useContext(UserContext);
   const quantity = 1;
   const navigate = useNavigate();
