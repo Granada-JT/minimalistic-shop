@@ -1,6 +1,7 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Col, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
+import cartIcon from "../images/cart.svg";
 import { useContext } from "react";
 import "../App.css";
 
@@ -62,6 +63,20 @@ export default function AppNavbar() {
                     <Nav.Link as={NavLink} to="/logout" className="ms-3 mt-3">
                       Logout
                     </Nav.Link>
+                    {user.id !== null && !user.isAdmin && (
+                      <Col
+                        md={1}
+                        className="
+                          d-flex
+                          align-self-end
+                          justify-content-center
+                        "
+                      >
+                        <Nav.Link as={NavLink} to="/cart">
+                          <img src={cartIcon} alt="cart" />
+                        </Nav.Link>
+                      </Col>
+                    )}
                   </>
                 )}
               </>
