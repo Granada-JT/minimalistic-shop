@@ -16,7 +16,7 @@ export default function AppNavbar() {
           className="mt-3"
           style={{ fontSize: "24px", fontWeight: "bold" }}
         >
-          My Shop
+          Minimalistic Shop
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
