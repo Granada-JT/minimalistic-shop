@@ -150,11 +150,13 @@
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
-  padding: 30px;
+  padding: 5px;
   margin: auto;
   max-width: auto;
   margin-top: 1.5rem;
   min-height: 79vh;
+  display: flex;
+  justify-content: center;
 }
 
 /* ProductCard CSS */
@@ -162,6 +164,7 @@
   width: 18rem;
   height: 530px;
   border-radius: 15px;
+  margin: 0 auto;
 }
 
 #productCardImg {
