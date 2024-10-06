@@ -48,7 +48,7 @@ export default function UserView({ productsData, isLoading }) {
               sm={12}
               md={6}
               lg={4}
-              xl={3}
+              xxl={3}
               className="
                 mt-2
                 mb-2
