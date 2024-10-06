@@ -234,7 +234,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -245,12 +244,19 @@ footer {
 #logo {
   width: 40px;
   height: 40px;
-  padding-right: 16px;
+  margin-right: 16px;
+}
+
+#logo-a {
   border-right: 2px solid black;
 }
 
-#email {
-  margin-top: 9px;
+#linkedin-img {
+  margin-top: 5px;
+}
+
+#email-img {
+  margin-top: 8px;
 }
 
 footer > div {
@@ -273,12 +279,17 @@ footer > div > div {
   justify-content: space-between;
   width: 100%;
   max-width: 200px;
+  margin-bottom: 10px;
 }
 
-a > img {
+footer a > img {
   width: 30px;
   height: 30px;
   margin-top: 2px;
+}
+
+#app {
+  min-height: 100vh;
 }
 
 /* NavBar Toggler CSS */
