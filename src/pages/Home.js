@@ -14,9 +14,6 @@ export default function Home() {
   return (
     <>
       <Banner data={data} />
-      {/* <FeaturedCourses/> */}
-      {/* <Hightlights/> */}
-      {/*<CourseCard/>*/}
     </>
   );
 }
