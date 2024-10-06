@@ -13,6 +13,12 @@ import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { UserProvider } from "./UserContext";
+import brandImg from "./images/jg-brand-nobg.png";
+import githubImg from "./images/github2.svg";
+import emailImg from "./images/envelope.svg";
+import linkedinImg from "./images/linkedin2.svg";
+
+
 
 function App() {
   const [user, setUser] = useState({
@@ -80,6 +86,25 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Container>
+        <footer>
+          <div>
+            <div>
+              <a href="https://granada-jt.github.io/web-developer-portfolio/" target="_blank" rel="noreferrer">
+                <img src={brandImg} alt="logo" id="logo" />
+              </a>
+              <a href="https://github.com/Granada-JT" target="_blank" rel="noreferrer">
+                <img src={githubImg} alt="github" />
+              </a>
+              <a href="https://www.linkedin.com/in/jomar-granada-a33604191/" target="_blank" rel="noreferrer">
+                <img src={linkedinImg} alt="linkedin" />
+              </a>
+              <a href="mailto:jomart.granada@gmail.com" target="_blank" rel="noreferrer" id="email">
+                <img src={emailImg} alt="email" />
+              </a>
+            </div>
+            <p id="copyright">Crafted with Love by Jomar Granada © 2024. All Rights Reserved.</p>
+          </div>
+        </footer>
       </Router>
     </UserProvider>
   );
