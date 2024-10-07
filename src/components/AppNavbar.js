@@ -9,7 +9,7 @@ export default function AppNavbar() {
   const { user } = useContext(UserContext);
 
   return (
-    <Navbar expand="lg" style={{ height: "94px" }}>
+    <Navbar expand="md" style={{ height: "94px" }}>
       <Container>
         <Navbar.Brand
           as={Link}
