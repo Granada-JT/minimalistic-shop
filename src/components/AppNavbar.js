@@ -1,15 +1,16 @@
 import { Col, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
 import UserContext from "../UserContext";
 import cartIcon from "../images/cart.svg";
-import { useContext } from "react";
 import "../App.css";
 
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar expand="md" style={{ height: "94px" }}>
+    <Navbar expand="md" style={{ height: "94px" }} expanded={expanded}>
       <Container>
         <Navbar.Brand
           as={Link}
@@ -19,7 +20,13 @@ export default function AppNavbar() {
         >
           Minimalistic Shop
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? <span>&#x2715;</span> : <span>&#9776;</span>}
+        </Navbar.Toggle>
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
             className="

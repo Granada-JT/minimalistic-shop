@@ -276,6 +276,25 @@ footer a > img {
   margin-top: 2px;
 }
 
+.navbar-toggler-icon.x-icon:after {
+  content: "\2715"; /* X icon */
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rotate-icon {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+
 /* NavBar Toggler CSS */
 @media (max-width: 767px) {
   #navHome {
