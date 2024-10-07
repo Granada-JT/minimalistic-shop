@@ -229,21 +229,10 @@
   border: 5px solid #e7e6e6;
 }
 
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-
+/* Footer CSS */
 #logo {
-  width: 40px;
-  height: 40px;
-  margin-right: 16px;
+  width: 35px;
+  margin-right: 18px;
 }
 
 #logo-a {
@@ -251,28 +240,28 @@ footer {
 }
 
 #linkedin-img {
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 #email-img {
-  margin-top: 8px;
+  margin-top: 7px;
 }
 
-footer > div {
+footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
   height: 100px;
-  margin: 20px;
+  margin-top: 20px;
   border-radius: 10px;
   font-family: Arial, sans-serif;
   font-size: 14px;
+  text-align: center;
 }
 
-footer > div > div {
+footer > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
