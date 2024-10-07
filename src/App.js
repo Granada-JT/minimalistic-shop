@@ -5,6 +5,7 @@ import AppNavbar from "./components/AppNavbar";
 import Cart from "./pages/Cart";
 import { Container } from "react-bootstrap";
 import Error from "./pages/Error";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -65,8 +66,8 @@ function App() {
   return (
     <UserProvider value={{ user, setUser, unsetUser }}>
       <Router>
+        <AppNavbar />
         <Container fluid>
-          <AppNavbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products/*" element={<Products />} />
@@ -79,6 +80,7 @@ function App() {
             <Route path="/*" element={<Error />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
+          <Footer />
         </Container>
       </Router>
     </UserProvider>

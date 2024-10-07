@@ -61,7 +61,6 @@
   max-width: auto;
   margin-top: 1.5rem;
   min-height: 79vh;
-  max-height: 79vh;
 }
 
 /* AdminView CSS */
@@ -150,11 +149,13 @@
   background-size: 150%;
   background-position: center;
   border-radius: 15px;
-  padding: 30px;
+  padding: 5px;
   margin: auto;
   max-width: auto;
   margin-top: 1.5rem;
   min-height: 79vh;
+  display: flex;
+  justify-content: center;
 }
 
 /* ProductCard CSS */
@@ -162,6 +163,7 @@
   width: 18rem;
   height: 530px;
   border-radius: 15px;
+  margin: 0 auto;
 }
 
 #productCardImg {
@@ -227,8 +229,55 @@
   border: 5px solid #e7e6e6;
 }
 
+/* Footer CSS */
+#logo {
+  width: 35px;
+  margin-right: 18px;
+}
+
+#logo-a {
+  border-right: 2px solid black;
+}
+
+#linkedin-img {
+  margin-top: 4px;
+}
+
+#email-img {
+  margin-top: 7px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+footer > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
+}
+
+footer a > img {
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+}
+
 /* NavBar Toggler CSS */
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   #navHome {
     display: flex;
     justify-content: flex-start!important;
@@ -239,5 +288,5 @@
     background-color: white;
     z-index: 9999;
     height: 255px;
-  }  
+  }
 }

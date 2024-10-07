@@ -20,47 +20,45 @@ export default function UserView({ productsData, isLoading }) {
   }, [productsData]);
 
   return (
-    <>
-      <Container className="my-4">
-        {isLoading ? (
-          <Row
-            id="userViewRow"
-            className="
-              d-flex
-              justify-content-center
-              align-items-center
-            "
-          >
-            Loading Products
-            <Spinner
-              animation="border"
-              style={{
-                height: "40px",
-                width: "40px",
-                margin: "10px 0 0 10px",
-              }}
-            />
-          </Row>
-        ) : (
-          <Row id="userViewRow">
-            {products.map((product, index) => (
-              <Col
-                key={index}
-                sm={12}
-                md={6}
-                lg={4}
-                xl={3}
-                className="
-                  mt-2
-                  mb-2
-                "
-              >
-                {product}
-              </Col>
-            ))}
-          </Row>
-        )}
-      </Container>
-    </>
+    <Container className="my-4">
+      {isLoading ? (
+        <Row
+          id="userViewRow"
+          className="
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+        >
+          Loading Products
+          <Spinner
+            animation="border"
+            style={{
+              height: "40px",
+              width: "40px",
+              margin: "10px 0 0 10px",
+            }}
+          />
+        </Row>
+      ) : (
+        <Row id="userViewRow">
+          {products.map((product, index) => (
+            <Col
+              key={index}
+              sm={12}
+              md={6}
+              lg={4}
+              xxl={3}
+              className="
+                mt-2
+                mb-2
+              "
+            >
+              {product}
+            </Col>
+          ))}
+        </Row>
+      )}
+    </Container>
   );
 }

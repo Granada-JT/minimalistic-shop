@@ -1,24 +1,35 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Col, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
 import UserContext from "../UserContext";
-import { useContext } from "react";
+import cartIcon from "../images/cart.svg";
 import "../App.css";
 
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar expand="lg" style={{ height: "94px" }}>
+    <Navbar expand="md" style={{ height: "94px" }} expanded={expanded}>
       <Container>
         <Navbar.Brand
           as={Link}
           to="/"
           className="mt-3"
-          style={{ fontSize: "24px", fontWeight: "bold" }}
+          style={{
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
         >
           Minimalistic Shop
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => setExpanded(!expanded)}
+          className="mt-3"
+        >
+          {expanded ? <span>&#x2715;</span> : <span>&#9776;</span>}
+        </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
             className="
@@ -62,6 +73,20 @@ export default function AppNavbar() {
                     <Nav.Link as={NavLink} to="/logout" className="ms-3 mt-3">
                       Logout
                     </Nav.Link>
+                    {user.id !== null && !user.isAdmin && (
+                      <Col
+                        md={1}
+                        className="
+                          d-flex
+                          align-self-end
+                          justify-content-center
+                        "
+                      >
+                        <Nav.Link as={NavLink} to="/cart">
+                          <img src={cartIcon} alt="cart" />
+                        </Nav.Link>
+                      </Col>
+                    )}
                   </>
                 )}
               </>
