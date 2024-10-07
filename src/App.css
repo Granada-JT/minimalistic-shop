@@ -276,12 +276,8 @@ footer a > img {
   margin-top: 2px;
 }
 
-#app {
-  min-height: 100vh;
-}
-
 /* NavBar Toggler CSS */
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   #navHome {
     display: flex;
     justify-content: flex-start!important;
@@ -292,5 +288,5 @@ footer a > img {
     background-color: white;
     z-index: 9999;
     height: 255px;
-  }  
+  }
 }

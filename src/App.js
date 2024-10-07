@@ -66,8 +66,8 @@ function App() {
   return (
     <UserProvider value={{ user, setUser, unsetUser }}>
       <Router>
-        <Container fluid id="app">
-          <AppNavbar />
+        <AppNavbar />
+        <Container fluid>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products/*" element={<Products />} />
