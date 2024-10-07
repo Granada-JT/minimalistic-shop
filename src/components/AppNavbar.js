@@ -16,13 +16,17 @@ export default function AppNavbar() {
           as={Link}
           to="/"
           className="mt-3"
-          style={{ fontSize: "24px", fontWeight: "bold" }}
+          style={{
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
         >
           Minimalistic Shop
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           onClick={() => setExpanded(!expanded)}
+          className="mt-3"
         >
           {expanded ? <span>&#x2715;</span> : <span>&#9776;</span>}
         </Navbar.Toggle>
