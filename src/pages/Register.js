@@ -174,7 +174,6 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               isInvalid={!!errors.email}
-              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             />
             {errors.email && (
               <Form.Text className="text-danger">{errors.email}</Form.Text>
@@ -184,7 +183,7 @@ export default function Register() {
             <Form.Label>Mobile No</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter your 11-digit mobile number"
+              placeholder="Enter a valid mobile number"
               value={mobileNo}
               onChange={(e) => setMobileNo(e.target.value)}
               isInvalid={!!errors.mobileNo}
