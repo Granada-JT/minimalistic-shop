@@ -115,7 +115,7 @@ export default function Register() {
       ) : (
         <Form
           onSubmit={(e) => registerUser(e)}
-          className="d-flex flex-column justify-content-center"
+          className="d-flex flex-column"
         >
           <h2 className="my-5 text-center">Sign Up</h2>
           <Form.Group className="mb-3" controlId="First Name">
