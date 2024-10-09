@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import BannerTwoColumns from "../components/BannerTwoColumns";
 import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -16,7 +16,7 @@ export default function Register() {
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [isActive] = useState(false);
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -175,7 +175,7 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               isInvalid={!!errors.email}
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             />
             {errors.email && (
               <Form.Text className="text-danger">{errors.email}</Form.Text>
@@ -223,15 +223,16 @@ export default function Register() {
             )}
           </Form.Group>
           {isActive ? (
-            <Button variant="primary" type="submit" id="submitBtn" className="mb-5">
-              Sign Up
-            </Button>
-          ) : (
             <Button
+              variant="primary"
               type="submit"
               id="submitBtn"
               className="mb-5"
             >
+              Sign Up
+            </Button>
+          ) : (
+            <Button type="submit" id="submitBtn" className="mb-5">
               Sign Up
             </Button>
           )}
