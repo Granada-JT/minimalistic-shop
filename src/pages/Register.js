@@ -89,7 +89,6 @@ export default function Register() {
       });
   }
 
-  // This useEffect enables and disables the register button depending if the form fields has user input.
   useEffect(() => {
     if (
       firstName !== "" &&
@@ -111,13 +110,14 @@ export default function Register() {
     backgroundImage: bgImage,
     column1Image: colImage,
     forms:
-      // This code block checks if the user is already logged in and will render the pages depending if they are logged in or not.
       user.id !== null ? (
         <Navigate to="/products" />
       ) : (
-        <Form onSubmit={(e) => registerUser(e)}>
+        <Form
+          onSubmit={(e) => registerUser(e)}
+          className="d-flex flex-column justify-content-center"
+        >
           <h2 className="my-5 text-center">Sign Up</h2>
-
           <Form.Group className="mb-3" controlId="First Name">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -130,7 +130,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="Last Name">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
@@ -143,7 +142,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="Email address">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -156,7 +154,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="Mobile No">
             <Form.Label>Mobile No:</Form.Label>
             <Form.Control
@@ -169,7 +166,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="Password1">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -182,7 +178,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="Password2">
             <Form.Label>Confirm Password:</Form.Label>
             <Form.Control
@@ -195,7 +190,6 @@ export default function Register() {
               }}
             />
           </Form.Group>
-
           {isActive ? (
             <Button
               variant="primary"
