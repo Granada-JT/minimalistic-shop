@@ -16,7 +16,6 @@ export default function Register() {
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isActive] = useState(false);
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -222,20 +221,14 @@ export default function Register() {
               </Form.Text>
             )}
           </Form.Group>
-          {isActive ? (
-            <Button
-              variant="primary"
-              type="submit"
-              id="submitBtn"
-              className="mb-5"
-            >
-              Sign Up
-            </Button>
-          ) : (
-            <Button type="submit" id="submitBtn" className="mb-5">
-              Sign Up
-            </Button>
-          )}
+          <Button
+            variant="primary"
+            type="submit"
+            id="submitBtn"
+            className="mb-5"
+          >
+            Sign Up
+          </Button>
         </Form>
       ),
   };
