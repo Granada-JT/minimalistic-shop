@@ -16,15 +16,10 @@ export default function Register() {
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [isActive, setIsActive] = useState(false);
 
-  // This function executes duplicate checks for mobile number and email address. It will register the new user if no duplicates are found.
   function registerUser(e) {
-    // This code block prevents the page redirection via form submission.
     e.preventDefault();
-
-    // This code block checks if the email address is already registered.
     fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
       method: "POST",
       headers: {
