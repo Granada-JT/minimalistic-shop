@@ -182,7 +182,7 @@ export default function Register() {
           <Form.Group className="mb-3" controlId="MobileNo">
             <Form.Label>Mobile No</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               placeholder="Enter a valid mobile number"
               value={mobileNo}
               onChange={(e) => setMobileNo(e.target.value)}
