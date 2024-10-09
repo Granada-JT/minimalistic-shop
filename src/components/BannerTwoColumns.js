@@ -12,12 +12,16 @@ export default function Banner({ data }) {
     margin: "auto",
     maxWidth: "auto",
     minHeight: "79vh",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
     <Container className="my-4" style={bannerStyle}>
       <Row>
-        <Col lg={6} md={12}>
+        <Col lg={6} md={12} className="m-auto">
           <img
             src={column1Image}
             alt="BackgroundImage"
