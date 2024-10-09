@@ -85,7 +85,7 @@ export default function Login() {
 
   const data = {
     backgroundImage: bgImage,
-    column1Image: colImage,
+    leftImage: colImage,
     forms:
       user.id !== null ? (
         <Navigate to="/" />
