@@ -108,7 +108,7 @@ export default function Register() {
 
   const data = {
     backgroundImage: bgImage,
-    column1Image: colImage,
+    leftImage: colImage,
     forms:
       user.id !== null ? (
         <Navigate to="/products" />
