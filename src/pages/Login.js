@@ -90,7 +90,7 @@ export default function Login() {
       user.id !== null ? (
         <Navigate to="/" />
       ) : (
-        <Form onSubmit={authenticateUser}>
+        <Form onSubmit={authenticateUser} className="d-flex flex-column">
           <h2 className="my-5 text-center">Login</h2>
           <Form.Group className="mb-3" controlId="Email address">
             <Form.Label>Email address</Form.Label>
