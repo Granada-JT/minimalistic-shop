@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import BannerTwoColumns from "../components/BannerTwoColumns";
 import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -11,14 +11,45 @@ export default function Login() {
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
 
   function authenticateUser(e) {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     loginUser({ email, password });
   }
 
+  function validateForm() {
+    let valid = true;
+    let newErrors = {
+      email: "",
+      password: "",
+    };
+
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+      valid = false;
+    }
+
+    if (password.length < 8) {
+      newErrors.password = "Please enter a valid password.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  }
+
   function loginUser(credentials) {
+    if (!validateForm()) {
+      return;
+    }
+
     fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
       method: "POST",
       headers: {
@@ -79,10 +110,6 @@ export default function Login() {
       });
   }
 
-  useEffect(() => {
-    setIsActive(email !== "" && password !== "");
-  }, [email, password]);
-
   const data = {
     backgroundImage: bgImage,
     leftImage: colImage,
@@ -90,7 +117,11 @@ export default function Login() {
       user.id !== null ? (
         <Navigate to="/" />
       ) : (
-        <Form onSubmit={authenticateUser} className="d-flex flex-column">
+        <Form
+          noValidate
+          onSubmit={authenticateUser}
+          className="d-flex flex-column"
+        >
           <h2 className="my-5 text-center">Login</h2>
           <Form.Group className="mb-3" controlId="Email address">
             <Form.Label>Email address</Form.Label>
@@ -100,7 +131,11 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              isInvalid={!!errors.email}
             />
+            {errors.email && (
+              <Form.Text className="text-danger">{errors.email}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group className="mb-3" controlId="Password1">
             <Form.Label>Password</Form.Label>
@@ -110,17 +145,15 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              isInvalid={!!errors.password}
             />
+            {errors.password && (
+              <Form.Text className="text-danger">{errors.password}</Form.Text>
+            )}
           </Form.Group>
-          {isActive ? (
-            <Button variant="primary" type="submit" id="submitBtn">
-              Login
-            </Button>
-          ) : (
-            <Button variant="danger" type="submit" id="submitBtn" disabled>
-              Login
-            </Button>
-          )}
+          <Button variant="primary" type="submit" id="submitBtn">
+            Login
+          </Button>
         </Form>
       ),
   };
