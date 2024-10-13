@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 
 export default function Banner({ data }) {
-  const { backgroundImage, leftImage, forms, isLoading } = data;
+  const { backgroundImage, forms, isLoading, leftImage, loadingMessage } = data;
 
   const bannerStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(231, 230, 230, 0.5), rgba(231, 230, 230, 0.5)), url(${backgroundImage})`,
@@ -49,7 +49,7 @@ export default function Banner({ data }) {
                 backdropFilter: "blur(3px)",
               }}
             >
-              Logging In
+              {loadingMessage}
               <Spinner
                 animation="border"
                 style={{

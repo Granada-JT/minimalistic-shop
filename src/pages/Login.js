@@ -164,6 +164,7 @@ export default function Login() {
         </Form>
       ),
     isLoading: isLoading,
+    loadingMessage: "Logging In",
   };
 
   return <BannerTwoColumns data={data} />;
