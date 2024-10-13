@@ -11,6 +11,7 @@ export default function Login() {
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: "",
     password: "",
@@ -50,6 +51,8 @@ export default function Login() {
       return;
     }
 
+    setIsLoading(true);
+
     fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
       method: "POST",
       headers: {
@@ -77,6 +80,9 @@ export default function Login() {
           icon: "error",
           text: "An error occurred. Please try again later.",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -121,8 +127,9 @@ export default function Login() {
           noValidate
           onSubmit={authenticateUser}
           className="d-flex flex-column"
+          style={{ width: "100%" }}
         >
-          <h2 className="my-5 text-center">Login</h2>
+          <h2 className="mb-3 text-center">Login</h2>
           <Form.Group className="mb-3" controlId="Email address">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -156,6 +163,7 @@ export default function Login() {
           </Button>
         </Form>
       ),
+    isLoading: isLoading,
   };
 
   return <BannerTwoColumns data={data} />;
