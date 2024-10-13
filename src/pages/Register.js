@@ -61,7 +61,7 @@ export default function Register() {
       newErrors.confirmPassword = "Passwords do not match.";
       valid = false;
     }
-
+    
     setErrors(newErrors);
     return valid;
   };
