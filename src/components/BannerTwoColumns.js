@@ -35,7 +35,12 @@ export default function Banner({ data }) {
             d-flex
             justify-content-center
             align-items-center
+            mt-5
+            mt-lg-0
           "
+          style={{
+            minHeight: "200px",
+          }}
         >
           {isLoading ? (
             <Row
