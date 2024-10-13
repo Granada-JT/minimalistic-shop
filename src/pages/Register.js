@@ -16,7 +16,7 @@ export default function Register() {
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -61,7 +61,7 @@ export default function Register() {
       newErrors.confirmPassword = "Passwords do not match.";
       valid = false;
     }
-
+    
     setErrors(newErrors);
     return valid;
   };
@@ -71,6 +71,8 @@ export default function Register() {
     if (!validateForm()) {
       return;
     }
+
+    setIsLoading(true);
 
     fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`, {
       method: "POST",
@@ -128,6 +130,9 @@ export default function Register() {
               }
             });
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -138,8 +143,12 @@ export default function Register() {
       user.id !== null ? (
         <Navigate to="/products" />
       ) : (
-        <Form noValidate onSubmit={registerUser} className="d-flex flex-column">
-          <h2 className="my-5 text-center">Sign Up</h2>
+        <Form
+          noValidate
+          onSubmit={registerUser}
+          className="d-flex flex-column w-100"
+        >
+          <h2 className="mb-3 text-center">Sign Up</h2>
           <Form.Group className="mb-3" controlId="FirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -230,6 +239,8 @@ export default function Register() {
           </Button>
         </Form>
       ),
+    isLoading: isLoading,
+    loadingMessage: "Signing Up",
   };
 
   return <BannerTwoColumns data={data} />;
