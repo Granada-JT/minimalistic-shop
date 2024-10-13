@@ -240,6 +240,7 @@ export default function Register() {
         </Form>
       ),
     isLoading: isLoading,
+    loadingMessage: "Signing Up",
   };
 
   return <BannerTwoColumns data={data} />;
