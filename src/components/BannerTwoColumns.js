@@ -39,7 +39,7 @@ export default function Banner({ data }) {
         >
           {isLoading ? (
             <Row
-              className="d-flex justify-content-center align-items-center"
+              className="d-flex justify-content-center align-items-center h-100"
               style={{
                 height: "100%",
                 borderRadius: "15px",
