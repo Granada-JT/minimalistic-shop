@@ -216,11 +216,9 @@
 }
 
 #rowProfile {
-  border-radius: 15px;
-  padding: 30px;
   margin: auto;
-  max-width: auto;
-  max-height: auto;
+  width: 100%;
+  height: 100%;
   margin-top: 1.5rem;
 }
 
