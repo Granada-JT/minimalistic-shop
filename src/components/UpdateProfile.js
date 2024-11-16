@@ -62,7 +62,7 @@ const UpdateProfile = ({ onUpdateUserDetails, user }) => {
   }, []);
 
   return (
-    <div className="container mb-3">
+    <div className="mb-3">
       <h2>Update Profile</h2>
       <div className="form-group mb-3">
         <label htmlFor="firstName">First Name:</label>
